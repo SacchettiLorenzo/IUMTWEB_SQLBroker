@@ -1,10 +1,10 @@
-package com.example.sqlbroker;
+package app;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SqlBrokerApplicationTests {
+class AppTests {
 
     @Test
     void contextLoads() {
