@@ -20,13 +20,19 @@ public class MoviesController {
         return  this.moviesService.getTop10Movies();
     }
 
-    @GetMapping("/{id}")
-    public Movies getMovie(@PathVariable int id) {
+    @GetMapping("/id")
+    public Movies getMovieById(@RequestParam Integer id) {
         return moviesService.getMovieById(id).orElse(null);
     }
 
-    @GetMapping("/{name}")
-    public Movies getMovieByName(@PathVariable String name) {
+    @GetMapping("/name")
+    public Movies getMovieByName(@RequestParam String name) {
         return moviesService.getMovieByName(name).orElse(null);
     }
+
+    @GetMapping("/actor")
+    public ArrayList<Movies> getMovieByActorId(@RequestParam Integer id) {
+        return moviesService.getMoviesByActorId(id);
+    }
+
 }

@@ -26,4 +26,8 @@ public class MoviesService {
     public ArrayList<Movies> getTop10Movies() {
         return moviesRepository.findTop10OrderByRatingDesc();
     }
+
+    public ArrayList<Movies> getMoviesByActorId(int id) {
+        return moviesRepository.findMoviesListByActorsId(id);
+    }
 }
