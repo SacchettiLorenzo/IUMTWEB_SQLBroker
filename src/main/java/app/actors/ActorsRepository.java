@@ -12,7 +12,6 @@ public interface ActorsRepository extends JpaRepository<Actors,Integer> {
     Optional<Actors> findById(Integer id);
     Optional<Actors> findByName(String name);
 
-    //ArrayList<Actors> findActorsByMoviesId(Integer id);
     ArrayList<Actors> findActorsListByMoviesId(Integer id);
 
 }

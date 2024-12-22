@@ -12,7 +12,10 @@ import java.util.Optional;
 
 @Repository
 public interface MoviesRepository extends JpaRepository<Movies, Integer> {
+
     Optional<Movies> findById(int id);
+
+    //todo: multiple result possible
     Optional<Movies> findByName(String title);
 
     ArrayList<Movies> findMoviesByMinuteIsBetween(int min, int max);

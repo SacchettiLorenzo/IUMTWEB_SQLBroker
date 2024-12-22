@@ -1,6 +1,7 @@
 package app.movies;
 
 import app.actors.Actors;
+import app.crew.Crew;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -37,6 +38,16 @@ public class Movies {
             inverseJoinColumns = @JoinColumn(name = "actor_id")
     )
     private List<Actors> actors;
+
+    //do not create getter and setters for actors in order to avoid nested calls
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name  = "actors_movies",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id")
+    )
+    private List<Crew> crew;
+
+
 
     public Integer getId() {
         return id;
