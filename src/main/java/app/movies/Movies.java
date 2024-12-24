@@ -1,10 +1,11 @@
 package app.movies;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import app.languages.Languages;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "movies")
@@ -29,6 +30,13 @@ public class Movies {
 
     @Column(name = "link", nullable = false, columnDefinition = "TEXT")
     private String link;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "languages_movies",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "language_id")
+    )
+    private List<Languages> languages;
 
     public int getId() {
         return id;
