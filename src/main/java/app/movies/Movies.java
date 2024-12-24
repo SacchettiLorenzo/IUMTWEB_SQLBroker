@@ -1,40 +1,64 @@
 package app.movies;
 
+import jakarta.persistence.*;
+import studios.Studio;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "movies")
 public class Movies {
     @Id
-    private int id;
+    private Integer id;
 
     @Column(name = "name", nullable = false, columnDefinition = "TEXT")
     private String name;
 
-    @Column(name = "tagline", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "date", nullable = true, columnDefinition = "IntegerEGER")
+    private Integer date;
+
+    @Column(name = "tagline", nullable = true, columnDefinition = "TEXT")
     private String tagline;
 
-    @Column(name = "description", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "description", nullable = true, columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "minute", nullable = false, columnDefinition = "INTEGER")
-    private int minute;
+    @Column(name = "minute", nullable = true, columnDefinition = "IntegerEGER")
+    private Integer minute;
 
-    @Column(name = "rating", nullable = false, columnDefinition = "FLOAT")
-    private float rating;
+    @Column(name = "rating", nullable = true, columnDefinition = "FLOAT")
+    private Float rating;
 
-    @Column(name = "link", nullable = false, columnDefinition = "TEXT")
-    private String link;
 
-    public int getId() {
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name  = "actors_movies",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "studio_id")
+    )
+    private List<Studio> studio;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name  = "actors_movies",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "release_id")
+    )
+    private List<Studio> releases;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name  = "actors_movies",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "country_id")
+    )
+    private List<Studio> countries;
+
+
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -62,27 +86,27 @@ public class Movies {
         this.description = description;
     }
 
-    public int getMinute() {
+    public Integer getMinute() {
         return minute;
     }
 
-    public void setMinute(int minute) {
+    public void setMinute(Integer minute) {
         this.minute = minute;
     }
 
-    public float getRating() {
+    public Float getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(Float rating) {
         this.rating = rating;
     }
 
-    public String getLink() {
-        return link;
+    public Integer getDate() {
+        return date;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setDate(Integer date) {
+        this.date = date;
     }
 }
