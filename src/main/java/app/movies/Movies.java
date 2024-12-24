@@ -1,7 +1,10 @@
 package app.movies;
 
 
+import app.genres.Genres;
 import app.languages.Languages;
+import app.posters.Posters;
+import app.themes.Themes;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -37,6 +40,27 @@ public class Movies {
             inverseJoinColumns = @JoinColumn(name = "language_id")
     )
     private List<Languages> languages;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "themes_movie",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "themes_id")
+    )
+    private List<Themes> themes;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "genres_movie",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "genres_id")
+    )
+    private List<Genres> genres;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "posters_movie",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "posters_id")
+    )
+    private List<Posters> posters;
 
     public int getId() {
         return id;
