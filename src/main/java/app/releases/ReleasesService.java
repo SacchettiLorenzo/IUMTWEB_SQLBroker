@@ -1,4 +1,4 @@
-package releases;
+package app.releases;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

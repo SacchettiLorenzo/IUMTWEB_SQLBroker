@@ -1,4 +1,4 @@
-package countries;
+package app.countries;
 
 import app.movies.Movies;
 import jakarta.persistence.*;

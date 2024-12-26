@@ -1,4 +1,4 @@
-package releases;
+package app.releases;
 
 import app.movies.Movies;
 import jakarta.persistence.*;

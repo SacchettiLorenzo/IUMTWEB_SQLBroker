@@ -1,9 +1,8 @@
 package app.movies;
 
 import jakarta.persistence.*;
-import studios.Studio;
+import app.studios.Studio;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity

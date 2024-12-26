@@ -1,4 +1,4 @@
-package studios;
+package app.studios;
 import app.movies.Movies;
 import jakarta.persistence.*;
 
