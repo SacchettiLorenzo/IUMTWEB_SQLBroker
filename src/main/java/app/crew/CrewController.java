@@ -1,6 +1,9 @@
 package app.crew;
 
 import app.actors.Actors;
+import app.movies.Movies;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +19,12 @@ public class CrewController {
 
     public CrewController(CrewService crewService) {
         this.crewService = crewService;
+    }
+
+    @GetMapping
+    public Page<Crew> findAll (@RequestParam int page, @RequestParam int size){
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return crewService.findAll(pageRequest);
     }
 
     @GetMapping("/id")
@@ -34,7 +43,8 @@ public class CrewController {
     }
 
     @GetMapping("/trending")
-    public ArrayList<Map<String, Object>> getTopActors() {
-        return  crewService.findMostPopularCrewList();
+    public ArrayList<Map<String, Object>> getTopActors(@RequestParam int page, @RequestParam int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return  crewService.findMostPopularCrewList(pageRequest);
     }
 }

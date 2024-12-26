@@ -4,6 +4,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Array;
@@ -18,6 +21,10 @@ public class ActorsService {
         this.actorsRepository = actorsRepository;
     }
 
+    public Page<Actors> findAll(PageRequest pageRequest) {
+        return actorsRepository.findAll(pageRequest);
+    }
+
     public Optional<Actors> getActorById(Integer id) {
         return this.actorsRepository.findById(id);
     }
@@ -29,7 +36,7 @@ public class ActorsService {
         return this.actorsRepository.findActorsListByMoviesId(id);
     }
 
-    public ArrayList<Map<String, Object>> findMostPopularActorsList() {
-        return this.actorsRepository.findMostPopularActorsList();
+    public Page<Map<String, Object>> findMostPopularActorsList(Pageable pageable) {
+        return this.actorsRepository.findMostPopularActorsList(pageable);
     }
 }

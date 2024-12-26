@@ -1,13 +1,17 @@
 package app.crew;
 
+import app.movies.Movies;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Optional;
 
-public interface CrewRepository extends JpaRepository<Crew, Integer> {
+public interface CrewRepository extends JpaRepository<Crew, Integer>, PagingAndSortingRepository<Crew, Integer> {
 
     Optional<Crew> findById(Integer integer);
 
@@ -19,6 +23,6 @@ public interface CrewRepository extends JpaRepository<Crew, Integer> {
             "FROM crew_movies cm\n" +
             "         join public.crew c on cm.crew_id = c.id\n" +
             "group by c.id\n" +
-            "order by movie_count desc LIMIT 100;", nativeQuery = true)
-    ArrayList<Map<String, Object>> findMostPopularCrewList();
+            "order by movie_count desc;", nativeQuery = true)
+    ArrayList<Map<String, Object>> findMostPopularCrewList(Pageable pageable);
 }

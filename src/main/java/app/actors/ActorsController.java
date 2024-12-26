@@ -2,6 +2,9 @@ package app.actors;
 
 import app.movies.Movies;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +25,12 @@ public class ActorsController {
         this.actorsService = actorsService;
     }
 
+    @GetMapping
+    public Page<Actors> findAll(@RequestParam int page, @RequestParam int size){
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return actorsService.findAll(pageRequest);
+    }
+
     @GetMapping("/id")
     public Actors getMovieById(@RequestParam Integer id) {
         return actorsService.getActorById(id).orElse(null);
@@ -38,8 +47,9 @@ public class ActorsController {
     }
 
     @GetMapping("/trending")
-    public ArrayList<Map<String, Object>> getTopActors() {
-        return actorsService.findMostPopularActorsList();
+    public Page<Map<String, Object>> getTopActors(@RequestParam int page, @RequestParam int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return actorsService.findMostPopularActorsList(pageRequest);
     }
 
 

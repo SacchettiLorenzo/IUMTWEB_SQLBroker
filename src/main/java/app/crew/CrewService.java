@@ -1,7 +1,10 @@
 package app.crew;
 
 import app.actors.Actors;
+import app.movies.Movies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,6 +20,10 @@ public class CrewService {
         this.crewRepository = crewRepository;
     }
 
+    public Page<Crew> findAll(PageRequest pageRequest) {
+        return crewRepository.findAll(pageRequest);
+    }
+
     public Optional<Crew> getCrewById(Integer id) {
         return crewRepository.findById(id);
     }
@@ -29,7 +36,7 @@ public class CrewService {
         return this.crewRepository.findCrewListByMoviesId(id);
     }
 
-    public ArrayList<Map<String, Object>> findMostPopularCrewList() {
-        return this.crewRepository.findMostPopularCrewList();
+    public ArrayList<Map<String, Object>> findMostPopularCrewList(PageRequest pageRequest) {
+        return this.crewRepository.findMostPopularCrewList(pageRequest);
     }
 }

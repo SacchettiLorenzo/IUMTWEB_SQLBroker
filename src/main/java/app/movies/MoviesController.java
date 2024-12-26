@@ -28,7 +28,6 @@ public class MoviesController {
     @GetMapping("/trending")
     public Page<Movies> getTopMovies(@RequestParam int page, @RequestParam int size){
         PageRequest pageRequest = PageRequest.of(page, size, Sort.by("rating").descending());
-
         return moviesService.findAll(pageRequest);
     }
 
@@ -47,7 +46,6 @@ public class MoviesController {
         if(partial != null && !partial.isEmpty()){
             res.addAll(moviesService.getMovieByNameContaining(partial));
         }
-
         return res;
     }
 
