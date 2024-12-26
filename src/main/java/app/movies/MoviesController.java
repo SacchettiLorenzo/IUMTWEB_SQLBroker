@@ -1,8 +1,12 @@
 package app.movies;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Properties;
 
 @RestController
 @RequestMapping("/movies")
@@ -16,8 +20,16 @@ public class MoviesController {
     }
 
     @GetMapping
-    public ArrayList<Movies> getTopMovies(){
-        return  this.moviesService.getTop10Movies();
+    public Page<Movies> findAll (@RequestParam int page, @RequestParam int size){
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return moviesService.findAll(pageRequest);
+    }
+
+    @GetMapping("/trending")
+    public Page<Movies> getTopMovies(@RequestParam int page, @RequestParam int size){
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by("rating").descending());
+
+        return moviesService.findAll(pageRequest);
     }
 
     @GetMapping("/id")
