@@ -26,8 +26,17 @@ public class MoviesController {
     }
 
     @GetMapping("/name")
-    public Movies getMovieByName(@RequestParam String name) {
-        return moviesService.getMovieByName(name).orElse(null);
+    public ArrayList<Movies> getMovieByName(@RequestParam String partial) {
+        ArrayList<Movies> res = new ArrayList<>();
+        if(partial != null && !partial.isEmpty()){
+            res = moviesService.getMovieByName(partial);
+        }
+
+        if(partial != null && !partial.isEmpty()){
+            res.addAll(moviesService.getMovieByNameContaining(partial));
+        }
+
+        return res;
     }
 
     @GetMapping("/actor")
@@ -35,4 +44,48 @@ public class MoviesController {
         return moviesService.getMoviesByActorId(id);
     }
 
+    /*
+    @GetMapping("/crew")
+    public ArrayList<Movies> getMovieByCrewId(@RequestParam Integer id) {
+
+    }
+
+    @GetMapping("/countries")
+    public ArrayList<Movies> getMovieByCountryId(@RequestParam Integer id) {
+
+    }
+
+    @GetMapping("/genres")
+    public ArrayList<Movies> getMovieByGenreId(@RequestParam Integer id) {
+
+    }
+
+    @GetMapping("/languages")
+    public ArrayList<Movies> getMovieByLanguageId(@RequestParam Integer id) {
+
+    }
+
+    @GetMapping("/studios")
+    public ArrayList<Movies> getMovieByStudioId(@RequestParam Integer id) {
+
+    }
+
+    @GetMapping("/themes")
+    public ArrayList<Movies> getMovieByThemeId(@RequestParam Integer id) {
+
+    }
+    */
+
+
+
 }
+
+/*
+get by id
+get by name
+get (studio,genres,...) by movie id
+get (studio,genres,...) by title containing a given string
+get most common value
+*/
+
+

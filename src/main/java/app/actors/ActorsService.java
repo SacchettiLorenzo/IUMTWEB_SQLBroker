@@ -1,11 +1,13 @@
 package app.actors;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.sql.Array;
+import java.util.*;
 
 @Service
 public class ActorsService {
@@ -16,7 +18,7 @@ public class ActorsService {
         this.actorsRepository = actorsRepository;
     }
 
-    public Optional<Actors> getActor(Integer id) {
+    public Optional<Actors> getActorById(Integer id) {
         return this.actorsRepository.findById(id);
     }
     public Optional<Actors> getActorByName(String name) {
@@ -25,5 +27,9 @@ public class ActorsService {
 
     public ArrayList<Actors> getActorsByMovieId(Integer id) {
         return this.actorsRepository.findActorsListByMoviesId(id);
+    }
+
+    public ArrayList<Map<String, Object>> findMostPopularActorsList() {
+        return this.actorsRepository.findMostPopularActorsList();
     }
 }

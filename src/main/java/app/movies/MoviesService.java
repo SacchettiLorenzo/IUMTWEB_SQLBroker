@@ -19,8 +19,12 @@ public class MoviesService {
         return moviesRepository.findById(id);
     }
 
-    public Optional<Movies> getMovieByName(String title) {
+    public ArrayList<Movies> getMovieByName(String title) {
         return moviesRepository.findByName(title);
+    }
+
+    public ArrayList<Movies> getMovieByNameContaining(String title) {
+        return moviesRepository.findMoviesListByNameIgnoreCaseContaining(title);
     }
 
     public ArrayList<Movies> getTop10Movies() {

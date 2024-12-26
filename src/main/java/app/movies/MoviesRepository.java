@@ -15,8 +15,10 @@ public interface MoviesRepository extends JpaRepository<Movies, Integer> {
 
     Optional<Movies> findById(int id);
 
-    //todo: multiple result possible
-    Optional<Movies> findByName(String title);
+
+    ArrayList<Movies> findByName(String title);
+
+    ArrayList<Movies> findMoviesListByNameIgnoreCaseContaining(String title);
 
     ArrayList<Movies> findMoviesByMinuteIsBetween(int min, int max);
     ArrayList<Movies> findMoviesByRatingBetween(float min, float max);
@@ -27,6 +29,7 @@ public interface MoviesRepository extends JpaRepository<Movies, Integer> {
     ArrayList<Movies> findTop10OrderByRatingDesc();
 
     ArrayList<Movies> findMoviesListByActorsId(int actorsId);
+
 
 
 
