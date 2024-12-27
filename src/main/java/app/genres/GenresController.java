@@ -5,6 +5,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.util.Optional;
 import java.util.List;
 
@@ -23,13 +32,20 @@ public class GenresController {
         return genresService.getGenreById(id).orElse(null);
     }
 
-    @GetMapping("/{genre}")
-    public List<Integer> getIdsByGenre(@PathVariable String genre) {
-        return genresService.getIdsByGenre(genre);
+    @GetMapping("/ids")
+    public Page<Integer> getIdsByGenre(@RequestParam String genre, @RequestParam int page, @RequestParam int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return genresService.getIdsByGenre(genre, pageable);
     }
 
     @GetMapping("/top10")
     public List<Object[]> getTop10Genres() {
         return genresService.getTop10Genres();
+    }
+
+    @GetMapping
+    public Page<Genres> findAll(@RequestParam int page, @RequestParam int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return genresService.findAll(pageRequest);
     }
 }
