@@ -1,7 +1,9 @@
 package app.releases;
 
+import app.movies.Movies;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -9,7 +11,7 @@ import java.awt.print.Pageable;
 import java.util.List;
 
 @Repository
-public interface ReleasesRepository extends JpaRepository<Releases, Integer> {
+public interface ReleasesRepository extends JpaRepository<Releases, Integer>, PagingAndSortingRepository<Releases, Integer> {
     List<Releases> findByFilmId(Integer filmId);
     List<Releases> findByCountry(String country);
     // Find all releases for a specific film by its ID

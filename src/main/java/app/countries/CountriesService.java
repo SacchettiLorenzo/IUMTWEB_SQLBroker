@@ -1,6 +1,8 @@
 package app.countries;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,9 +16,12 @@ public class CountriesService {
         this.countriesRepository = countriesRepository;
     }
 
-    public List<Countries> getAllCountries() {
-        return countriesRepository.findAll();
+    //handle requests from controller
+    //findAll is provided by PagingAndSortingRepository Interface
+    public Page<Countries> findAll(PageRequest pageRequest) {
+        return countriesRepository.findAll(pageRequest);
     }
+
 
     public Countries getCountryById(Integer id) {
         return countriesRepository.findById(id).orElse(null);

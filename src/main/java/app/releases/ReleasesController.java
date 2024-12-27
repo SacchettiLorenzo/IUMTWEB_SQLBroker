@@ -1,8 +1,13 @@
 package app.releases;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -11,14 +16,37 @@ public class ReleasesController {
 
     private final ReleasesService releasesService;
 
+    List<String> classFields = new ArrayList<>();
+
     @Autowired
     public ReleasesController(ReleasesService releasesService) {
         this.releasesService = releasesService;
+        for (Field field : Releases.class.getDeclaredFields()) {
+            classFields.add(field.getName().toLowerCase());
+        }
     }
 
     @GetMapping
-    public List<Releases> getAllReleases() {
-        return releasesService.getAllReleases();
+    public Page<Releases> findAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(defaultValue = "Id") String sortParam,
+            @RequestParam(defaultValue = "ASC") String sortDirection
+    ) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        if (sortParam != null) {
+            Sort.Direction tempSortDirection = Sort.Direction.ASC;
+            String tempSortParam = "Id";
+            if (sortDirection != null && (sortDirection.equalsIgnoreCase("DESC") || sortDirection.equalsIgnoreCase("ASC"))) {
+                tempSortDirection = sortDirection.equalsIgnoreCase("DESC") ? Sort.Direction.DESC : Sort.Direction.ASC;
+            }
+
+            if (classFields.contains(sortParam.toLowerCase())) {
+                tempSortParam = sortParam.toLowerCase();
+            }
+            pageRequest = pageRequest.withSort(Sort.by(tempSortDirection, tempSortParam));
+        }
+        return (Page<Releases>) releasesService.findAll(pageRequest);
     }
 
     @GetMapping("/{id}")

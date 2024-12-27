@@ -6,14 +6,14 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "release")
+@Table(name = "releases")
 public class Releases {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "film_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Integer filmId;
 
     @Column(name = "country", nullable = false, columnDefinition = "TEXT")

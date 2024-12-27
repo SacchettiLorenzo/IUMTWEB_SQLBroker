@@ -1,8 +1,9 @@
 package app.releases;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -14,8 +15,8 @@ public class ReleasesService {
         this.releasesRepository = releasesRepository;
     }
 
-    public List<Releases> getAllReleases() {
-        return releasesRepository.findAll();
+    public Page<Releases> findAll(PageRequest pageRequest) {
+        return releasesRepository.findAll(pageRequest);
     }
 
     public Releases getReleaseById(Integer id) {

@@ -13,7 +13,7 @@ public class Countries {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "film_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Integer filmId;
 
     @Column(name = "country", nullable = false, columnDefinition = "TEXT")

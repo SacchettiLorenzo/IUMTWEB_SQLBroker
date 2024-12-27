@@ -1,6 +1,8 @@
 package app.studios;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +17,8 @@ public class StudioService {
         this.studiosRepository = studiosRepository;
     }
 
-    public List<Studio> getAllStudios() {
-        return studiosRepository.findAll();
+    public Page<Studio> findAll(PageRequest pageRequest) {
+        return studiosRepository.findAll(pageRequest);
     }
 
     public Studio getStudioById(Integer id) {

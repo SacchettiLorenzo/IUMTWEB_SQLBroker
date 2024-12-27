@@ -1,7 +1,9 @@
 package app.studios;
 
+import app.movies.Movies;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface StudiosRepository extends JpaRepository<Studio, Integer> {
+public interface StudiosRepository extends JpaRepository<Studio, Integer>, PagingAndSortingRepository<Studio, Integer> {
     Optional<Studio> findById(Integer integer);
 
     Optional<Studio> findByName(String name);

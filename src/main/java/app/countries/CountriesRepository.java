@@ -1,15 +1,17 @@
 package app.countries;
 
+import app.movies.Movies;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import java.awt.print.Pageable;
 import java.util.List;
 
 @Repository
-public interface CountriesRepository extends JpaRepository<Countries, Integer> {
+public interface CountriesRepository extends JpaRepository<Countries, Integer>, PagingAndSortingRepository<Countries, Integer> {
     List<Countries> findByFilmId(Integer filmId);
     List<Countries> findByCountry(String country);
     // Find all unique countries associated with a specific film
