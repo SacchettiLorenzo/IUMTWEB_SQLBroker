@@ -3,8 +3,9 @@ package app.languages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,16 +27,16 @@ public class LanguagesService {
         return this.languagesRepository.findLanguageById(id);
     }
 
-    public List<Languages> findAllLanguagesById(Integer id){
-        return this.languagesRepository.findAllLanguagesById(id);
+    public Page<Languages> findAllLanguagesById(Integer id, Pageable pageable) {
+        return this.languagesRepository.findAllLanguagesById(id, pageable);
     }
 
-    public List<Languages> findAllLanguagesByType(String type){
-        return this.languagesRepository.findAllLanguagesByType(type);
+    public Page<Languages> findAllLanguagesByType(String type, Pageable pageable) {
+        return this.languagesRepository.findAllLanguagesByType(type, pageable);
     }
 
-    public List<Languages> findMovieByLanguage(String language){
-        return this.languagesRepository.findMovieByLanguage(language);
+    public Page<Languages> findMovieByLanguage(String language, Pageable pageable) {
+        return this.languagesRepository.findMovieByLanguage(language, pageable);
     }
 
     public List<Object[]> getTop10Languages() {
@@ -44,6 +45,10 @@ public class LanguagesService {
 
     public List<Object[]> getTop5Types() {
         return languagesRepository.findTop5Types();
+    }
+
+    public Page<Languages> findAll(PageRequest pageRequest) {
+        return languagesRepository.findAll(pageRequest);
     }
 
 
