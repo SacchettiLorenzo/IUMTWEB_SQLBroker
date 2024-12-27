@@ -8,6 +8,5 @@ import java.util.Optional;
 @Repository
 public interface PostersRepository extends JpaRepository<Posters, Integer> {
 
-    // Trova il link in base all'ID
     Optional<String> findLinkById(int id);
 }

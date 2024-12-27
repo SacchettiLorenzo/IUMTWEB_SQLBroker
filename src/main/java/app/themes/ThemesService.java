@@ -2,6 +2,8 @@ package app.themes;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -27,5 +29,9 @@ public class ThemesService {
 
     public List<Object[]> getTop10Themes() {
         return themesRepository.findTop10Themes();
+    }
+
+    public Page<Themes> findAll(Pageable pageable) {
+        return themesRepository.findAll(pageable);
     }
 }
