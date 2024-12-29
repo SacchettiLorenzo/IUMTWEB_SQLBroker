@@ -17,7 +17,7 @@ public class PostersController {
         this.postersService = postersService;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id")
     public Optional<String> getLinkById(@PathVariable int id) {
         return postersService.getLinkById(id);
     }

@@ -22,12 +22,12 @@ public class ThemesController {
         this.themesService = themesService;
     }
 
-    @GetMapping("{id}")
+    @GetMapping("id")
     public Themes getThemeById(@PathVariable Integer id) {
         return themesService.getThemeById(id).orElse(null);
     }
 
-    @GetMapping("{theme}")
+    @GetMapping("theme")
     public Optional<Integer> getIdByTheme(@PathVariable String theme) {
         return themesService.getIdByTheme(theme);
     }
