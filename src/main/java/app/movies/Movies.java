@@ -19,7 +19,7 @@ public class Movies {
     @Column(name = "name", nullable = false, columnDefinition = "TEXT")
     private String name;
 
-    @Column(name = "date", nullable = true, columnDefinition = "IntegerEGER")
+    @Column(name = "date", nullable = true, columnDefinition = "INTEGER")
     private Integer date;
 
     @Column(name = "tagline", nullable = true, columnDefinition = "TEXT")
@@ -28,11 +28,14 @@ public class Movies {
     @Column(name = "description", nullable = true, columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "minute", nullable = true, columnDefinition = "IntegerEGER")
+    @Column(name = "minute", nullable = true, columnDefinition = "INTEGER")
     private Integer minute;
 
     @Column(name = "rating", nullable = true, columnDefinition = "FLOAT")
     private Float rating;
+
+    @Column(name = "poster", nullable = true, columnDefinition = "TEXT")
+    private String poster;
 
     //do not create getter and setters for actors in order to avoid nested calls
     @ManyToMany(fetch = FetchType.LAZY)
@@ -147,5 +150,13 @@ public class Movies {
 
     public void setDate(Integer date) {
         this.date = date;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
     }
 }
