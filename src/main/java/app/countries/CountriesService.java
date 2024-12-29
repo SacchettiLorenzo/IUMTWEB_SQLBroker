@@ -28,7 +28,7 @@ public class CountriesService {
     }
 
     public List<Countries> getCountriesByFilmId(Integer filmId) {
-        return countriesRepository.findByFilmId(filmId);
+        return countriesRepository.findByid(filmId);
     }
 
     public List<Countries> getCountriesByName(String country) {

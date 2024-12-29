@@ -40,8 +40,4 @@ public class MoviesService {
     public ArrayList<Movies> getMovieByNameContaining(String title) {
         return moviesRepository.findMoviesListByNameIgnoreCaseContaining(title);
     }
-
-    public ArrayList<Movies> getMoviesByActorId(int id) {
-        return moviesRepository.findMoviesListByActorsId(id);
-    }
 }

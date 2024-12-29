@@ -24,7 +24,7 @@ public class ReleasesService {
     }
 
     public List<Releases> getReleasesByFilmId(Integer filmId) {
-        return releasesRepository.findByFilmId(filmId);
+        return releasesRepository.findByid(filmId);
     }
 
     public List<Releases> getReleasesByCountry(String country) {

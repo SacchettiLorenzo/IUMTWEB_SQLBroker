@@ -16,7 +16,6 @@ import java.util.Optional;
 public interface StudiosRepository extends JpaRepository<Studio, Integer>, PagingAndSortingRepository<Studio, Integer> {
     Optional<Studio> findById(Integer integer);
 
-    Optional<Studio> findByName(String name);
 
     ArrayList<Studio> findStudioListByMoviesId(Integer id);
 

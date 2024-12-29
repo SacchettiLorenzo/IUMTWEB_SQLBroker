@@ -1,6 +1,7 @@
 package app.movies;
 
 
+import org.springframework.data.domain.Limit;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -20,7 +21,8 @@ public interface MoviesRepository extends JpaRepository<Movies, Integer>, Paging
     List<Movies> findMoviesByRatingBetween(float min, float max);
     ArrayList<Movies> findMoviesListByNameIgnoreCaseContaining(String title);
     ArrayList<Movies> findAllByOrderByRatingDesc();
-    ArrayList<Movies> findMoviesListByActorsId(int actorsId);
+
+    ArrayList<Movies> findMoviesListByid(Integer id, Limit limit);
     @Query(value = "SELECT m FROM Movies m ORDER BY m.rating DESC LIMIT 10")
     ArrayList<Movies> findTop10OrderByRatingDesc();
 

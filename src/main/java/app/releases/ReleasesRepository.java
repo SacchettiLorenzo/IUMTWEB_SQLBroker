@@ -12,10 +12,10 @@ import java.util.List;
 
 @Repository
 public interface ReleasesRepository extends JpaRepository<Releases, Integer>, PagingAndSortingRepository<Releases, Integer> {
-    List<Releases> findByFilmId(Integer filmId);
+    List<Releases> findByid(Integer id);
     List<Releases> findByCountry(String country);
     // Find all releases for a specific film by its ID
-    @Query("SELECT r FROM Releases r WHERE r.filmId = :filmId")
+    @Query("SELECT r FROM Releases r WHERE r.id = :filmId")
     List<Releases> findReleasesByFilmId(@Param("filmId") Integer filmId);
 
     // Find releases of a specific type (e.g., "Theatrical") in a given country

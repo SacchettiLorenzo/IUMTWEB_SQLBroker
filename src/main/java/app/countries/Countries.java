@@ -13,9 +13,6 @@ public class Countries {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "id", nullable = false)
-    private Integer filmId;
-
     @Column(name = "country", nullable = false, columnDefinition = "TEXT")
     private String country;
 
@@ -28,14 +25,6 @@ public class Countries {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getFilmId() {
-        return filmId;
-    }
-
-    public void setFilmId(Integer filmId) {
-        this.filmId = filmId;
     }
 
     public String getCountry() {

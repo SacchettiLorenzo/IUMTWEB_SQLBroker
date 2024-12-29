@@ -3,6 +3,7 @@ package app.releases;
 import app.movies.Movies;
 import jakarta.persistence.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -13,14 +14,11 @@ public class Releases {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "id", nullable = false)
-    private Integer filmId;
-
     @Column(name = "country", nullable = false, columnDefinition = "TEXT")
     private String country;
 
-    @Column(name = "date", nullable = true)
-    private String date; // You can use LocalDate if the date format is standard
+    @Column(name = "date", nullable = true, columnDefinition = "DATE")
+    private Date date; // You can use LocalDate if the date format is standard
 
     @Column(name = "type", nullable = true, columnDefinition = "TEXT")
     private String type;
@@ -39,14 +37,6 @@ public class Releases {
         this.id = id;
     }
 
-    public Integer getFilmId() {
-        return filmId;
-    }
-
-    public void setFilmId(Integer filmId) {
-        this.filmId = filmId;
-    }
-
     public String getCountry() {
         return country;
     }
@@ -55,11 +45,11 @@ public class Releases {
         this.country = country;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

@@ -12,18 +12,18 @@ import java.util.List;
 
 @Repository
 public interface CountriesRepository extends JpaRepository<Countries, Integer>, PagingAndSortingRepository<Countries, Integer> {
-    List<Countries> findByFilmId(Integer filmId);
+    List<Countries> findByid(Integer id);
     List<Countries> findByCountry(String country);
     // Find all unique countries associated with a specific film
-    @Query("SELECT DISTINCT c.country FROM Countries c WHERE c.filmId = :filmId")
-    List<String> findUniqueCountriesByFilmId(@Param("filmId") Integer filmId);
+    @Query("SELECT DISTINCT c.country FROM Countries c WHERE c.id = :id")
+    List<String> findUniqueCountriesByFilmId(@Param("id") Integer id);
 
     // Count the number of films associated with a specific country
     @Query("SELECT COUNT(c) FROM Countries c WHERE c.country = :country")
     long countFilmsByCountry(@Param("country") String country);
 
     // Find all film IDs originating from a specific country
-    @Query("SELECT c.filmId FROM Countries c WHERE c.country = :country")
+    @Query("SELECT c.id FROM Countries c WHERE c.country = :country")
     List<Integer> findFilmIdsByCountry(@Param("country") String country);
 
     // Find the top N countries associated with films, ordered alphabetically

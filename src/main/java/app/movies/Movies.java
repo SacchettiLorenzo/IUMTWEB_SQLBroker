@@ -1,5 +1,7 @@
 package app.movies;
 
+import app.countries.Countries;
+import app.releases.Releases;
 import jakarta.persistence.*;
 import app.studios.Studio;
 
@@ -14,7 +16,7 @@ public class Movies {
     @Column(name = "name", nullable = false, columnDefinition = "TEXT")
     private String name;
 
-    @Column(name = "date", nullable = true, columnDefinition = "IntegerEGER")
+    @Column(name = "date", nullable = true, columnDefinition = "INTEGER")
     private Integer date;
 
     @Column(name = "tagline", nullable = true, columnDefinition = "TEXT")
@@ -23,7 +25,7 @@ public class Movies {
     @Column(name = "description", nullable = true, columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "minute", nullable = true, columnDefinition = "IntegerEGER")
+    @Column(name = "minute", nullable = true, columnDefinition = "INTEGER")
     private Integer minute;
 
     @Column(name = "rating", nullable = true, columnDefinition = "FLOAT")
@@ -31,25 +33,25 @@ public class Movies {
 
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name  = "actors_movies",
+    @JoinTable(name  = "studios_movies",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "studio_id")
     )
     private List<Studio> studio;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name  = "actors_movies",
+    @JoinTable(name  = "releases_movies",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "release_id")
     )
-    private List<Studio> releases;
+    private List<Releases> releases;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name  = "actors_movies",
+    @JoinTable(name  = "countries_movies",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "country_id")
     )
-    private List<Studio> countries;
+    private List<Countries> countries;
 
 
 
