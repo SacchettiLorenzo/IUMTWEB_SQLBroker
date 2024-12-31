@@ -53,6 +53,26 @@ public class StudioController {
         return studiosService.getStudioById(id);
     }
 
+    @GetMapping("/search")
+    public List<Studio> findStudiosByKeyword(@RequestParam String keyword) {
+        return studiosService.findStudiosByKeyword(keyword);
+    }
+
+    @GetMapping("/count")
+    public long countAllStudios() {
+        return studiosService.countAllStudios();
+    }
+
+    @GetMapping("/top")
+    public List<Studio> findTopStudios(@RequestParam(defaultValue = "10") int limit) {
+        return studiosService.findTopStudios(limit);
+    }
+
+    @GetMapping("/alphabetical")
+    public List<Studio> findStudiosAlphabetically() {
+        return studiosService.findStudiosAlphabetically();
+    }
+
     @PostMapping
     public Studio saveStudio(@RequestBody Studio studio) {
         return studiosService.saveStudio(studio);

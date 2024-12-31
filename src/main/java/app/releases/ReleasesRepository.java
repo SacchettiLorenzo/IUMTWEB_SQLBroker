@@ -12,25 +12,18 @@ import java.util.List;
 
 @Repository
 public interface ReleasesRepository extends JpaRepository<Releases, Integer>, PagingAndSortingRepository<Releases, Integer> {
-    List<Releases> findByid(Integer id);
+    // Find releases by country
     List<Releases> findByCountry(String country);
-    // Find all releases for a specific film by its ID
-    @Query("SELECT r FROM Releases r WHERE r.id = :filmId")
-    List<Releases> findReleasesByFilmId(@Param("filmId") Integer filmId);
 
-    // Find releases of a specific type (e.g., "Theatrical") in a given country
+    // Find releases of a specific type in a specific country
     @Query("SELECT r FROM Releases r WHERE r.type = :type AND r.country = :country")
     List<Releases> findReleasesByTypeAndCountry(@Param("type") String type, @Param("country") String country);
 
-    // Find releases with a specific rating, ordered by date in descending order
+    // Find releases with a specific rating, ordered by date descending
     @Query("SELECT r FROM Releases r WHERE r.rating = :rating ORDER BY r.date DESC")
     List<Releases> findReleasesByRatingOrderedByDate(@Param("rating") String rating);
 
-    // Count the number of releases for a specific type
-    @Query("SELECT COUNT(r) FROM Releases r WHERE r.type = :type")
-    long countReleasesByType(@Param("type") String type);
-
-    // Find the top N releases ordered by date
+    // Find top N releases ordered by date
     @Query("SELECT r FROM Releases r ORDER BY r.date DESC")
     List<Releases> findTopReleases(Pageable pageable);
 }

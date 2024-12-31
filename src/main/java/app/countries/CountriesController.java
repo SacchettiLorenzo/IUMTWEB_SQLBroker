@@ -47,19 +47,14 @@ public class CountriesController {
     }
 
     @GetMapping("/trending")
-    public Page<Countries> getTopCountries(@RequestParam int page, @RequestParam int size){
-        PageRequest pageRequest = PageRequest.of(page, size, Sort.by("rating").descending());
+    public Page<Countries> getTopCountries(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by("country").descending());
         return countriesService.findAll(pageRequest);
     }
 
     @GetMapping("/{id}")
     public Countries getCountryById(@PathVariable Integer id) {
         return countriesService.getCountryById(id);
-    }
-
-    @GetMapping("/film/{filmId}")
-    public List<Countries> getCountriesByFilmId(@PathVariable Integer filmId) {
-        return countriesService.getCountriesByFilmId(filmId);
     }
 
     @GetMapping("/name")

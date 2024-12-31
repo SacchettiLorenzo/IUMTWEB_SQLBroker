@@ -23,8 +23,12 @@ public class ReleasesService {
         return releasesRepository.findById(id).orElse(null);
     }
 
-    public List<Releases> getReleasesByFilmId(Integer filmId) {
-        return releasesRepository.findByid(filmId);
+    public List<Releases> getReleasesByTypeAndCountry(String type, String country) {
+        return releasesRepository.findReleasesByTypeAndCountry(type, country);
+    }
+
+    public List<Releases> getReleasesByRatingOrderedByDate(String rating) {
+        return releasesRepository.findReleasesByRatingOrderedByDate(rating);
     }
 
     public List<Releases> getReleasesByCountry(String country) {

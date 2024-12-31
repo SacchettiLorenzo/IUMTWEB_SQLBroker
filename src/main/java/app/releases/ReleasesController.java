@@ -54,14 +54,22 @@ public class ReleasesController {
         return releasesService.getReleaseById(id);
     }
 
-    @GetMapping("/film/{filmId}")
-    public List<Releases> getReleasesByFilmId(@PathVariable Integer filmId) {
-        return releasesService.getReleasesByFilmId(filmId);
-    }
-
     @GetMapping("/country")
     public List<Releases> getReleasesByCountry(@RequestParam String country) {
         return releasesService.getReleasesByCountry(country);
+    }
+
+    @GetMapping("/type")
+    public List<Releases> getReleasesByTypeAndCountry(
+            @RequestParam String type,
+            @RequestParam String country
+    ) {
+        return releasesService.getReleasesByTypeAndCountry(type, country);
+    }
+
+    @GetMapping("/rating")
+    public List<Releases> getReleasesByRatingOrderedByDate(@RequestParam String rating) {
+        return releasesService.getReleasesByRatingOrderedByDate(rating);
     }
 
     @PostMapping

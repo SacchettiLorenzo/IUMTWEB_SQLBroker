@@ -1,6 +1,5 @@
 package app.countries;
 
-import app.movies.Movies;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -9,28 +8,33 @@ import org.springframework.stereotype.Repository;
 
 import java.awt.print.Pageable;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CountriesRepository extends JpaRepository<Countries, Integer>, PagingAndSortingRepository<Countries, Integer> {
-    List<Countries> findByid(Integer id);
+    // Find countries by ID
+    Optional<Countries> findById(Integer id);
+
+    // Find countries by country name
     List<Countries> findByCountry(String country);
-    // Find all unique countries associated with a specific film
-    @Query("SELECT DISTINCT c.country FROM Countries c WHERE c.id = :id")
-    List<String> findUniqueCountriesByFilmId(@Param("id") Integer id);
 
-    // Count the number of films associated with a specific country
+    // Find all unique countries (without filmId)
+    @Query("SELECT DISTINCT c.country FROM Countries c")
+    List<String> findUniqueCountries();
+
+    // Count the number of countries with a specific name
     @Query("SELECT COUNT(c) FROM Countries c WHERE c.country = :country")
-    long countFilmsByCountry(@Param("country") String country);
+    long countCountriesByName(@Param("country") String country);
 
-    // Find all film IDs originating from a specific country
-    @Query("SELECT c.id FROM Countries c WHERE c.country = :country")
-    List<Integer> findFilmIdsByCountry(@Param("country") String country);
-
-    // Find the top N countries associated with films, ordered alphabetically
-    @Query("SELECT DISTINCT c.country FROM Countries c ORDER BY c.country ASC")
+    // Find all country names ordered alphabetically with pagination
+    @Query("SELECT c.country FROM Countries c ORDER BY c.country ASC")
     List<String> findTopCountries(Pageable pageable);
 
-    // Count the total number of unique countries registered
+    // Count the total number of unique country names
     @Query("SELECT COUNT(DISTINCT c.country) FROM Countries c")
     long countAllUniqueCountries();
+
+    // Find the top 10 countries ordered by name descending
+    @Query("SELECT c FROM Countries c ORDER BY c.country DESC")
+    List<Countries> findTop10Countries(Pageable pageable);
 }
