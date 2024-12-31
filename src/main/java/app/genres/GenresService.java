@@ -1,5 +1,6 @@
 package app.genres;
 
+import app.movies.Movies;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -26,17 +27,24 @@ public class GenresService {
         return genresRepository.findById(id);
     }
 
-    public List<Object[]> getTop10Genres() {
-        return genresRepository.findTop10Genres();
+    public List<Object[]> getTop10Genres(Pageable pageable) {
+        return genresRepository.findTop10Genres(pageable);
     }
 
-    public Page<Integer> getIdsByGenre(String genre, Pageable pageable) {
-        return genresRepository.findIdsByGenre(genre, pageable);
-    }
-
-
-    // Metodo per ottenere tutti i generi con supporto alla paginazione
     public Page<Genres> findAll(Pageable pageable) {
         return genresRepository.findAll(pageable);
     }
+
+    public Page<Movies> getMoviesByGenre(String genre, Pageable pageable) {
+        return genresRepository.findMoviesByGenre(genre, pageable);
+    }
+
+
+
+
+
+
+
+
+
 }

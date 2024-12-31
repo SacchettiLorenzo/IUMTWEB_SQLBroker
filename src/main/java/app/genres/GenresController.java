@@ -1,5 +1,6 @@
 package app.genres;
 
+import app.movies.Movies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,15 +62,27 @@ public class GenresController {
         return genresService.getGenreById(id).orElse(null);
     }
 
-    @GetMapping("/ids")
-    public Page<Integer> getIdsByGenre(@RequestParam String genre, @RequestParam int page, @RequestParam int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return genresService.getIdsByGenre(genre, pageable);
-    }
 
     @GetMapping("/top10")
-    public List<Object[]> getTop10Genres() {
-        return genresService.getTop10Genres();
+    public List<Object[]> getTop10Genres(@RequestParam(defaultValue = "0") int page,
+                                         @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return genresService.getTop10Genres(pageable);
     }
+
+    @GetMapping("/{genre}/movies")
+    public Page<Movies> getMoviesByGenre(@PathVariable String genre,
+                                         @RequestParam(defaultValue = "0") int page,
+                                         @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return genresService.getMoviesByGenre(genre, pageable);
+    }
+
+
+
+
+
+
+
 
 }

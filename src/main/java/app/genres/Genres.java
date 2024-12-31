@@ -37,3 +37,13 @@ public class Genres {
 
 
 }
+
+
+/*
+    comandi per formulare le query:
+    - curl http://localhost:8080/genres (per stampare tutta la tabella generi)
+    - curl http://localhost:8080/genres/top10 (per trovare i top 10)
+    - curl http://localhost:8080/genres/1 (per trovare il genere associato all'id)
+    - curl "http://localhost:8080/genres/Comedy/movies?page=0&size=10" (per trovare il film associato al genere)
+
+ */
