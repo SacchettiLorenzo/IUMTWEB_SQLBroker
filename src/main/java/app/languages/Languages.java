@@ -11,9 +11,6 @@ public class Languages {
     @Id
     private int id;
 
-    @Column(name = "type", nullable = false, columnDefinition = "TEXT")
-    private String type;
-
     @Column(name = "language", nullable = false, columnDefinition = "TEXT")
     private String language;
 
@@ -23,14 +20,6 @@ public class Languages {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getLanguage() {

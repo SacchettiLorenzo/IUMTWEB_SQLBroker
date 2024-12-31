@@ -3,7 +3,6 @@ package app.movies;
 
 import app.genres.Genres;
 import app.languages.Languages;
-import app.posters.Posters;
 import app.themes.Themes;
 import jakarta.persistence.*;
 
@@ -31,9 +30,6 @@ public class Movies {
     @Column(name = "rating", nullable = false, columnDefinition = "FLOAT")
     private float rating;
 
-    @Column(name = "link", nullable = false, columnDefinition = "TEXT")
-    private String link;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "languages_movies",
             joinColumns = @JoinColumn(name = "movie_id"),
@@ -42,26 +38,27 @@ public class Movies {
     private List<Languages> languages;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "themes_movie",
+    @JoinTable(name = "themes_movies",
             joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "themes_id")
+            inverseJoinColumns = @JoinColumn(name = "theme_id")
     )
     private List<Themes> themes;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "genres_movie",
+    @JoinTable(name = "genres_movies",
             joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "genres_id")
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
     )
     private List<Genres> genres;
 
+    /*
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "posters_movie",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "posters_id")
     )
     private List<Posters> posters;
-
+    */
     public int getId() {
         return id;
     }
@@ -110,11 +107,4 @@ public class Movies {
         this.rating = rating;
     }
 
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
 }

@@ -19,20 +19,12 @@ public class LanguagesService {
         this.languagesRepository = languagesRepository;
     }
 
-    public Optional<Languages> getType(Integer id){
-        return this.languagesRepository.findTypeLanguagesById(id);
-    }
-
     public Optional<Languages> getLanguage(Integer id){
         return this.languagesRepository.findLanguageById(id);
     }
 
     public Page<Languages> findAllLanguagesById(Integer id, Pageable pageable) {
         return this.languagesRepository.findAllLanguagesById(id, pageable);
-    }
-
-    public Page<Languages> findAllLanguagesByType(String type, Pageable pageable) {
-        return this.languagesRepository.findAllLanguagesByType(type, pageable);
     }
 
     public Page<Languages> findMovieByLanguage(String language, Pageable pageable) {
@@ -43,9 +35,6 @@ public class LanguagesService {
         return languagesRepository.findTop10Languages();
     }
 
-    public List<Object[]> getTop5Types() {
-        return languagesRepository.findTop5Types();
-    }
 
     public Page<Languages> findAll(PageRequest pageRequest) {
         return languagesRepository.findAll(pageRequest);

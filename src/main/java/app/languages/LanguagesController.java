@@ -56,11 +56,6 @@ public class LanguagesController {
         return languagesService.findAll(pageRequest);
     }
 
-    @GetMapping("/type")
-    public Languages getTypeLanguages(@RequestParam Integer movie_id) {
-        return languagesService.getType(movie_id).orElse(null);
-    }
-
     @GetMapping("/language")
     public Languages getLanguage(@RequestParam Integer movie_id) {
         return languagesService.getLanguage(movie_id).orElse(null);
@@ -79,18 +74,6 @@ public class LanguagesController {
         return languagesService.findAllLanguagesById(movie_id, pageable);
     }
 
-    @GetMapping("/languages/type")
-    public Page<Languages> getLanguagesByType(@RequestParam String type,
-                                              @RequestParam(defaultValue = "0") int page,
-                                              @RequestParam(defaultValue = "20") int size,
-                                              @RequestParam(required = false, defaultValue = "id") String sortParam,
-                                              @RequestParam(required = false, defaultValue = "ASC") String sortDirection) {
-
-        Pageable pageable = PageRequest.of(page, size, Sort.by(
-                sortDirection.equalsIgnoreCase("DESC") ? Sort.Direction.DESC : Sort.Direction.ASC, sortParam));
-
-        return languagesService.findAllLanguagesByType(type, pageable);
-    }
 
     @GetMapping("/movies/language")
     public Page<Languages> getMoviesByLanguage(@RequestParam String language,
@@ -110,10 +93,6 @@ public class LanguagesController {
         return languagesService.getTop10Languages();
     }
 
-    @GetMapping("/top5-types")
-    public List<Object[]> getTop5Types() {
-        return languagesService.getTop5Types();
-    }
 
 
 }

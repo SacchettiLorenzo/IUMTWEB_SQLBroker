@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.List;
 
 @Repository
-public interface GenresRepository extends JpaRepository<Genres, Integer> {
+public interface GenresRepository extends JpaRepository<Genres, Integer>, PagingAndSortingRepository<Genres, Integer> {
 
     // Trova il genere in base all'ID
     Optional<Genres> findById(Integer id);
@@ -34,5 +34,4 @@ public interface GenresRepository extends JpaRepository<Genres, Integer> {
             "ORDER BY count DESC")
     List<Object[]> findTop10Genres();
 
-    Page<Genres> findAll(Pageable pageable);
 }

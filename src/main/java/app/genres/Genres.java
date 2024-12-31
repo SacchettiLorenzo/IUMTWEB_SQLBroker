@@ -10,12 +10,16 @@ import java.util.List;
 public class Genres {
 
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @Column(name = "genre", nullable = false, columnDefinition = "TEXT")
     private String genre;
 
-    public int getId() {
+    @ManyToMany(mappedBy = "genres")
+    private List<Movies> movies;
+
+    public Integer getId() {
         return id;
     }
 
@@ -31,6 +35,5 @@ public class Genres {
         this.genre = genre;
     }
 
-    @ManyToMany(mappedBy = "genres")
-    private List<Movies> movies;
+
 }

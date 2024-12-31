@@ -19,7 +19,6 @@ public interface LanguagesRepository extends JpaRepository<Languages, Integer> {
 
     Page<Languages> findAllLanguagesById(Integer id, Pageable pageable);
 
-    Page<Languages> findAllLanguagesByType(String type, Pageable pageable);
 
     Page<Languages> findMovieByLanguage(String language, Pageable pageable);
 
@@ -29,11 +28,6 @@ public interface LanguagesRepository extends JpaRepository<Languages, Integer> {
             "ORDER BY count DESC")
     List<Object[]> findTop10Languages();
 
-    @Query("SELECT l.type, COUNT(l.type) AS count " +
-            "FROM Languages l " +
-            "GROUP BY l.type " +
-            "ORDER BY count DESC")
-    List<Object[]> findTop5Types();
 
 
 }
