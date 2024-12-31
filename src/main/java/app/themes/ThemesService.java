@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ThemesService {
@@ -19,16 +20,16 @@ public class ThemesService {
         this.themesRepository = themesRepository;
     }
 
-    public Optional<Themes> getThemeById(Integer id) {
-        return themesRepository.findById(id);
+    public Optional<String> getThemeByMovieId(Integer movieId) {
+        return themesRepository.getThemeByMovieId(movieId);
     }
 
-    public Optional<Integer> getIdByTheme(String theme) {
-        return themesRepository.findIdByTheme(theme);
+    public List<String> getMoviesByTheme(String theme) {
+        return themesRepository.getMoviesByTheme(theme);
     }
 
     public List<Object[]> getTop10Themes() {
-        return themesRepository.findTop10Themes();
+        return themesRepository.findTop10Themes().stream().limit(10).collect(Collectors.toList());
     }
 
     public Page<Themes> findAll(Pageable pageable) {
