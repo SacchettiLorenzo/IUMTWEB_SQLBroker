@@ -26,4 +26,7 @@ public interface ReleasesRepository extends JpaRepository<Releases, Integer>, Pa
     // Find top N releases ordered by date
     @Query("SELECT r FROM Releases r ORDER BY r.date DESC")
     List<Releases> findTopReleases(Pageable pageable);
+
+    @Query ("SELECT DISTINCT r.country FROM Releases r")
+    List<String> findDistinctCountry();
 }

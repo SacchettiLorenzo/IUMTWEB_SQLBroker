@@ -55,16 +55,31 @@ public class ReleasesController {
     }
 
     @GetMapping("/country")
-    public List<Releases> getReleasesByCountry(@RequestParam String country) {
+    public List<Releases> getReleasesByCountry(@RequestParam(required = false, defaultValue = "Unknown") String country) {
+        System.out.println("Parametro ricevuto in Spring Boot: " + country);
         return releasesService.getReleasesByCountry(country);
     }
 
     @GetMapping("/type")
     public List<Releases> getReleasesByTypeAndCountry(
-            @RequestParam String type,
-            @RequestParam String country
-    ) {
-        return releasesService.getReleasesByTypeAndCountry(type, country);
+            @RequestParam(required = false) String type,
+            @RequestParam(required = false) String country) {
+        System.out.println("Parametro 'type' ricevuto: " + type);
+        System.out.println("Parametro 'country' ricevuto: " + country);
+
+        if (type == null || country == null) {
+            throw new IllegalArgumentException("I parametri 'type' e 'country' sono obbligatori.");
+        }
+
+        List<Releases> releases = releasesService.getReleasesByTypeAndCountry(type, country);
+
+        releases.forEach(release -> {
+            if (release.getRating() == null) {
+                release.setRating("N/A");
+            }
+        });
+
+        return releases;
     }
 
     @GetMapping("/rating")
