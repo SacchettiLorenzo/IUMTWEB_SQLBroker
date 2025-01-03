@@ -13,6 +13,13 @@ import java.util.List;
 
 import java.util.List;
 
+import app.genres.Genres;
+import app.languages.Languages;
+import app.themes.Themes;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "movies")
@@ -106,8 +113,6 @@ public class Movies {
     )
     private List<Studio> studio;
 
-
-    public Integer getId() {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name  = "releases_movies",
             joinColumns = @JoinColumn(name = "movie_id"),
@@ -121,10 +126,39 @@ public class Movies {
             inverseJoinColumns = @JoinColumn(name = "country_id")
     )
     private List<Countries> countries;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "languages_movies",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "language_id")
+    )
+    private List<Languages> languages;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "themes_movies",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "theme_id")
+    )
+    private List<Themes> themes;
 
 
 
     public Integer getId() {
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "genres_movies",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    private List<Genres> genres;
+
+    /*
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "posters_movie",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "posters_id")
+    )
+    private List<Posters> posters;
+    */
+    public int getId() {
         return id;
     }
 
@@ -156,7 +190,7 @@ public class Movies {
         this.description = description;
     }
 
-    public Integer getMinute() {
+    public int getMinute() {
         return minute;
     }
 
