@@ -29,6 +29,7 @@ public class Themes {
     public void setTheme(String theme) {
         this.theme = theme;
     }
+
     @ManyToMany(mappedBy = "themes")
     private List<Movies> movies;
 

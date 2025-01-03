@@ -59,53 +59,12 @@ public class Movies {
 
     //do not create getter and setters for actors in order to avoid nested calls
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name  = "actors_movies",
+    @JoinTable(name  = "crew_movies",
             joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "actor_id")
+            inverseJoinColumns = @JoinColumn(name = "crew_id")
     )
     private List<Crew> crew;
 
-    /*
-    //do not create getter and setters for actors in order to avoid nested calls
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name  = "countries_movies",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "country_id")
-    )
-    private List<Countries> countries;
-
-    //do not create getter and setters for actors in order to avoid nested calls
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name  = "genres_movies",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "genre_id")
-    )
-    private List<Genres> genres;
-
-    //do not create getter and setters for actors in order to avoid nested calls
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name  = "languages_movies",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "langiage_id")
-    )
-    private List<Languages> languages;
-
-    //do not create getter and setters for actors in order to avoid nested calls
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name  = "studios_movies",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "studio_id")
-    )
-    private List<Studios> studios;
-
-    //do not create getter and setters for actors in order to avoid nested calls
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name  = "themes_movies",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "studio_id")
-    )
-    private List<Themes> themes;
-    */
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name  = "studios_movies",
             joinColumns = @JoinColumn(name = "movie_id"),
@@ -140,9 +99,6 @@ public class Movies {
     )
     private List<Themes> themes;
 
-
-
-    public Integer getId() {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "genres_movies",
             joinColumns = @JoinColumn(name = "movie_id"),
@@ -150,14 +106,7 @@ public class Movies {
     )
     private List<Genres> genres;
 
-    /*
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "posters_movie",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "posters_id")
-    )
-    private List<Posters> posters;
-    */
+
     public int getId() {
         return id;
     }

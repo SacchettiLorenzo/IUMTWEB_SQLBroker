@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.List;
 
@@ -31,6 +32,9 @@ public interface ThemesRepository extends JpaRepository<Themes, Integer> {
             "ORDER BY count DESC " +
             "LIMIT 10", nativeQuery = true)
     List<Object[]> findTop10Themes();
+
+    ArrayList<Themes> findThemesListByMoviesId(Integer movieId);
+
 
 }
 
