@@ -85,6 +85,7 @@ public class Movies {
             inverseJoinColumns = @JoinColumn(name = "country_id")
     )
     private List<Countries> countries;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "languages_movies",
             joinColumns = @JoinColumn(name = "movie_id"),

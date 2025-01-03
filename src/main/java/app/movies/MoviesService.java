@@ -1,13 +1,12 @@
 package app.movies;
 
+import app.countries.Countries;
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Limit;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+import java.util.Set;
 
 
 @Service
@@ -56,6 +55,10 @@ public class MoviesService {
         return moviesRepository.findMoviesListByGenreIdOrderByDateDesc(Limit.of(10));
     }
     */
+
+    public ArrayList<Movies> getMoviesByDateCountriesGenreLanguageTheme(Integer date, Integer countries_id, Integer genres_id, Integer languages_id, Integer themes_id){
+        return moviesRepository.findMoviesListByDateAndCountriesIdAndGenresIdAndLanguagesIdAndThemesId(date, countries_id, genres_id, languages_id, themes_id);
+    }
 
 
 
