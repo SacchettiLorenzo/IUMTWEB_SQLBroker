@@ -5,6 +5,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Limit;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -47,6 +48,12 @@ public class MoviesService {
     public ArrayList<Movies> getMoviesByActorId(int id) {
         return moviesRepository.findMoviesListByActorsId(id);
     }
+
+    /*
+    public ArrayList<Movies> getMoviesByGenreId(int id) {
+        return moviesRepository.findMoviesListByGenreIdOrderByDateDesc(Limit.of(10));
+    }
+    */
 
 
 

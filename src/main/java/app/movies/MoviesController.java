@@ -78,6 +78,19 @@ public class MoviesController {
     }
 
     /*
+    @GetMapping("/similar")
+    public ArrayList<Movies> getMoviesByGenreId(@RequestParam Integer id) {
+        return moviesService.getMoviesByGenreId(id);
+    }
+    */
+
+    //todo:
+//    @GetMapping("/stats")
+//    public ArrayList<Movies> getOverallStats(@RequestParam Integer id) {
+//        return moviesService.getMoviesByActorId(id);
+//    }
+
+    /*
     @GetMapping("/crew")
     public ArrayList<Movies> getMovieByCrewId(@RequestParam Integer id) {
 
