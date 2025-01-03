@@ -1,5 +1,9 @@
 package app.movies;
 
+import app.countries.Countries;
+import app.releases.Releases;
+import jakarta.persistence.*;
+import app.studios.Studio;
 import app.actors.Actors;
 import app.crew.Crew;
 import jakarta.persistence.*;
@@ -7,6 +11,7 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.List;
 
 
 @Entity
@@ -94,6 +99,29 @@ public class Movies {
     )
     private List<Themes> themes;
     */
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name  = "studios_movies",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "studio_id")
+    )
+    private List<Studio> studio;
+
+
+    public Integer getId() {
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name  = "releases_movies",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "release_id")
+    )
+    private List<Releases> releases;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name  = "countries_movies",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "country_id")
+    )
+    private List<Countries> countries;
+
 
 
     public Integer getId() {
