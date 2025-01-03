@@ -13,6 +13,8 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Optional;
 import java.util.List;
 
@@ -21,21 +23,11 @@ public interface GenresRepository extends JpaRepository<Genres, Integer>, Paging
 
     Optional<Genres> findById(Integer id);
 
-    @Query(value = "SELECT g.genre, COUNT(gm.genre_id) AS genreCount " +
-            "FROM genres g " +
-            "JOIN genres_movies gm ON g.id = gm.genre_id " +
-            "GROUP BY g.genre " +
-            "ORDER BY genreCount DESC", nativeQuery = true)
-    List<Object[]> findTop10Genres(Pageable pageable);
+    ArrayList<Genres> findGenresListByMoviesId(Integer id);
 
-    @Query("SELECT m FROM Movies m " +
-            "JOIN m.genres g " +
-            "WHERE g.genre = :genre")
-    Page<Movies> findMoviesByGenre(@Param("genre") String genre, Pageable pageable);
-
-
-
-
+    @Query(value = "SELECT  a.*,count('genre_id') as movie_count " +
+            "FROM genres_movies ac join public.genres a on ac.genre_id = a.id group by a.id order by movie_count desc", nativeQuery = true)
+    Page<Map<String, Object>> findMostPopularGenresList(Pageable pageable);
 
 
 

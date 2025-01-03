@@ -10,8 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class GenresService {
@@ -27,16 +26,16 @@ public class GenresService {
         return genresRepository.findById(id);
     }
 
-    public List<Object[]> getTop10Genres(Pageable pageable) {
-        return genresRepository.findTop10Genres(pageable);
+    public ArrayList<Genres> getGenresByMovieId(Integer id) {
+        return this.genresRepository.findGenresListByMoviesId(id);
     }
 
-    public Page<Genres> findAll(Pageable pageable) {
-        return genresRepository.findAll(pageable);
+    public Page<Genres> findAll(PageRequest pageRequest) {
+        return genresRepository.findAll(pageRequest);
     }
 
-    public Page<Movies> getMoviesByGenre(String genre, Pageable pageable) {
-        return genresRepository.findMoviesByGenre(genre, pageable);
+    public Page<Map<String, Object>> findMostPopularGenresList(Pageable pageable) {
+        return this.genresRepository.findMostPopularGenresList(pageable);
     }
 
 

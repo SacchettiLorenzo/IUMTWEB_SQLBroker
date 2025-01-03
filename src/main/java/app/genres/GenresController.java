@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/genres")
@@ -57,25 +55,21 @@ public class GenresController {
         return genresService.findAll(pageRequest);
     }
 
-    @GetMapping("/{id}")
-    public Genres getGenreById(@PathVariable Integer id) {
+    @GetMapping("/id")
+    public Genres getGenreById(@RequestParam Integer id) {
         return genresService.getGenreById(id).orElse(null);
     }
 
-
-    @GetMapping("/top10")
-    public List<Object[]> getTop10Genres(@RequestParam(defaultValue = "0") int page,
-                                         @RequestParam(defaultValue = "10") int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return genresService.getTop10Genres(pageable);
+    @GetMapping("/movie")
+    public ArrayList<Genres> getGenresByMovieId(@RequestParam Integer movieId) {
+        return genresService.getGenresByMovieId(movieId);
     }
 
-    @GetMapping("/{genre}/movies")
-    public Page<Movies> getMoviesByGenre(@PathVariable String genre,
-                                         @RequestParam(defaultValue = "0") int page,
-                                         @RequestParam(defaultValue = "10") int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return genresService.getMoviesByGenre(genre, pageable);
+
+    @GetMapping("/trending")
+    public Page<Map<String, Object>> getTopGenres(@RequestParam int page, @RequestParam int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return genresService.findMostPopularGenresList(pageRequest);
     }
 
 
