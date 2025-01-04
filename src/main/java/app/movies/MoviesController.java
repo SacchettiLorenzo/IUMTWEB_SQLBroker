@@ -105,12 +105,13 @@ public class MoviesController {
     public ArrayList<Movies> getMovieByCountryId(@RequestParam Integer id) {
 
     }
-
+    */
     @GetMapping("/genres")
-    public ArrayList<Movies> getMovieByGenreId(@RequestParam Integer id) {
-
+    public Page<Movies> getMovieByGenreId(@RequestParam int page, @RequestParam int size,@RequestParam Integer genresId) {
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by("rating").descending());
+        return moviesService.getMoviesByGenreId(genresId, pageRequest);
     }
-
+    /*
     @GetMapping("/languages")
     public ArrayList<Movies> getMovieByLanguageId(@RequestParam Integer id) {
 
