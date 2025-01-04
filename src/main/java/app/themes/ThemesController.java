@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.ui.context.Theme;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,18 +54,21 @@ public class ThemesController {
         return themesService.findAll(pageRequest);
     }
 
-    @GetMapping("/themeByMovieId")
-    public String getThemeByMovieId(@RequestParam Integer movieId) {
-        return themesService.getThemeByMovieId(movieId).orElse("Nessun tema trovato per l'ID specificato");
+    @GetMapping("/theme")
+    public ArrayList<Themes> getThemeByMovieId(@RequestParam Integer movieId) {
+        return themesService.getThemeByMovieId(movieId);
     }
 
+    //va implementato in movies
+    /*
     @GetMapping("/moviesByTheme")
     public List<String> getMoviesByTheme(@RequestParam String theme) {
         return themesService.getMoviesByTheme(theme);
     }
+    */
 
     @GetMapping("/top10")
-    public List<Object[]> getTop10Themes() {
+    public ArrayList<Themes> getTop10Themes() {
         return themesService.getTop10Themes();
     }
 

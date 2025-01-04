@@ -59,7 +59,7 @@ public class LanguagesController {
     }
 
 
-    @GetMapping("/top10-languages")
+    @GetMapping("/top10")
     public ArrayList<Languages> getTop10Languages() {
         return languagesService.getTop10Languages();
     }
