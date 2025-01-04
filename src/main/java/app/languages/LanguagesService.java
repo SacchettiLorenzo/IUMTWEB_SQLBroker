@@ -19,16 +19,16 @@ public class LanguagesService {
         this.languagesRepository = languagesRepository;
     }
 
-    public Optional<String> getLanguage(Integer movieId) {
-        return languagesRepository.findLanguageByMovieId(movieId);
+    public ArrayList<Languages> getLanguage(Integer movieId) {
+        return languagesRepository.findLanguageByMoviesId(movieId);
     }
 
-    public Page<String> getMoviesByLanguage(String language, Pageable pageable) {
-        return languagesRepository.findMoviesByLanguage(language, pageable);
+    public Optional<String> getTypesByLanguage(Integer languageId) {
+        return languagesRepository.findTypeByLanguageId(languageId);
     }
 
-    public List<Object[]> getTop10Languages() {
-        return languagesRepository.findTop10Languages();
+    public ArrayList<Languages> getTop10Languages() {
+        return languagesRepository.findTop10LanguagesWithId();
     }
 
     public Page<Languages> findAll(PageRequest pageRequest) {

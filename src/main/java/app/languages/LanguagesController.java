@@ -54,23 +54,19 @@ public class LanguagesController {
     }
 
     @GetMapping("/language")
-    public String getLanguage(@RequestParam Integer movie_id) {
-        return languagesService.getLanguage(movie_id).orElse("Language not found");
+    public ArrayList<Languages> getLanguage(@RequestParam Integer movieId) {
+        return languagesService.getLanguage(movieId);
     }
 
-
-    @GetMapping("/{language}")
-    public Page<String> getMoviesByLanguage(
-            @PathVariable String language,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return languagesService.getMoviesByLanguage(language, pageable);
-    }
 
     @GetMapping("/top10-languages")
-    public List<Object[]> getTop10Languages() {
+    public ArrayList<Languages> getTop10Languages() {
         return languagesService.getTop10Languages();
+    }
+
+    @GetMapping("/find-type")
+    public Optional<String> getType(@RequestParam Integer languageId) {
+        return languagesService.getTypesByLanguage(languageId);
     }
 
 

@@ -14,32 +14,28 @@ import java.util.Optional;
 
 public interface LanguagesRepository extends JpaRepository<Languages, Integer> {
 
-    Optional<Languages> findTypeLanguagesById(Integer id);
-
-    @Query("SELECT l.language FROM Languages l " +
-            "JOIN l.movies m " +
-            "WHERE m.id = :movieId")
-    Optional<String> findLanguageByMovieId(@Param("movieId") Integer movieId);
+    ArrayList<Languages> findLanguageByMoviesId(Integer movieId);
 
 
-
-    @Query("SELECT m.name FROM Movies m " +
-            "JOIN m.languages l " +
-            "WHERE l.language = :language")
-    Page<String> findMoviesByLanguage(@Param("language") String language, Pageable pageable);
+    //da implementare in main
+    //Page<String> findMoviesByLanguage(String language, Pageable pageable);
 
 
-    @Query(value = "SELECT l.language, COUNT(m.id) AS count " +
+    @Query(value = "SELECT l.id, l.language " +
             "FROM languages l " +
             "JOIN languages_movies lm ON lm.language_id = l.id " +
             "JOIN movies m ON m.id = lm.movie_id " +
-            "GROUP BY l.language " +
-            "ORDER BY count DESC", nativeQuery = true)
-    List<Object[]> findTop10Languages();
+            "GROUP BY l.id, l.language " +
+            "ORDER BY COUNT(m.id) DESC " +
+            "LIMIT 10", nativeQuery = true)
+    ArrayList<Languages> findTop10LanguagesWithId();
+
+
+
 
     @Query(value = "SELECT lm.type FROM languages_movies lm " +
-            "WHERE lm.movie_id = :movieId", nativeQuery = true)
-    Optional<String> findTypeByMovieId(@Param("movieId") Integer movieId);
+            "WHERE lm.language_id :languageId", nativeQuery = true)
+    Optional<String> findTypeByLanguageId(Integer languageId);
 
 
 
