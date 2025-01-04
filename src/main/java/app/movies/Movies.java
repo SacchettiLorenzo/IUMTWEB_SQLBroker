@@ -140,7 +140,7 @@ public class Movies {
         this.description = description;
     }
 
-    public int getMinute() {
+    public Integer getMinute() {
         return minute;
     }
 
