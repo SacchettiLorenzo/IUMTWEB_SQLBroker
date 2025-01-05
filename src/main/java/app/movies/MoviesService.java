@@ -61,6 +61,7 @@ public class MoviesService {
     }
 
 
+
     public Page<Movies> getMoviesByGenreId(Integer genresId, PageRequest pageRequest) {
         return moviesRepository.findMoviesByGenresId(genresId, pageRequest);
     }

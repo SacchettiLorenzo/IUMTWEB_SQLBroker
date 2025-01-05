@@ -52,9 +52,9 @@ public class CountriesController {
         return countriesService.findAll(pageRequest);
     }
 
-    @GetMapping("/{id}")
-    public Countries getCountryById(@PathVariable Integer id) {
-        return countriesService.getCountryById(id);
+    @GetMapping("/id")
+    public ArrayList<Countries> getCountryById(@RequestParam Integer movieId) {
+        return countriesService.getCountryById(movieId);
     }
 
     @GetMapping("/name")
