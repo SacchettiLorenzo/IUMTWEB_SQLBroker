@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,8 +24,8 @@ public class CountriesService {
     }
 
 
-    public Countries getCountryById(Integer id) {
-        return countriesRepository.findById(id).orElse(null);
+    public ArrayList<Countries> getCountryById(Integer movieId) {
+        return countriesRepository.findCountriesByMoviesId(movieId);
     }
 
     public List<Countries> getCountriesByName(String country) {

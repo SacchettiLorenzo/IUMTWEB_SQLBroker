@@ -7,13 +7,14 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import java.awt.print.Pageable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface CountriesRepository extends JpaRepository<Countries, Integer>, PagingAndSortingRepository<Countries, Integer> {
     // Find countries by ID
-    Optional<Countries> findById(Integer id);
+    ArrayList<Countries> findCountriesByMoviesId(Integer movieId);
 
     // Find countries by country name
     List<Countries> findByCountry(String country);
