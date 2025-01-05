@@ -83,7 +83,7 @@ public class MoviesController {
     }
 
     @GetMapping("/filter")
-    public ArrayList<Movies> getMoviesByDateCountriesGenreLanguageTheme(@RequestParam Integer date,@RequestParam Integer countries_id,@RequestParam Integer genres_id,@RequestParam Integer languages_id,@RequestParam Integer themes_id){
+    public ArrayList<Movies> getMoviesByDateCountriesGenreLanguageTheme(@RequestParam(required = false) Integer date,@RequestParam(required = false) Integer countries_id,@RequestParam(required = false) Integer genres_id,@RequestParam(required = false) Integer languages_id,@RequestParam(required = false) Integer themes_id){
         return moviesService.getMoviesByDateCountriesGenreLanguageTheme(date,countries_id,genres_id,languages_id,themes_id);
     }
 
