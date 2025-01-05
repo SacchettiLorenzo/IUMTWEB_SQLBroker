@@ -39,4 +39,8 @@ public class ActorsService {
     public Page<Map<String, Object>> findMostPopularActorsList(Pageable pageable) {
         return this.actorsRepository.findMostPopularActorsList(pageable);
     }
+
+    public List<Actors> getActorsByNameContaining(String partial) {
+        return actorsRepository.findActorsByNameContaining(partial);
+    }
 }

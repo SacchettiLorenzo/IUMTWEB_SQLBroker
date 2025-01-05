@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.management.ObjectName;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @RestController
 @RequestMapping("/actors")
@@ -59,8 +56,14 @@ public class ActorsController {
     }
 
     @GetMapping("/name")
-    public Actors getActor(@RequestParam String name) {
-        return actorsService.getActorByName(name).orElse(null);
+    public List<Actors> getActorsByPartialName(@RequestParam String partial) {
+        if (partial == null || partial.isEmpty()) {
+            return new ArrayList<>(); // Restituisce un elenco vuoto se la query è vuota
+        }
+        List<Actors> exactMatches = actorsService.getActorByName(partial).map(Collections::singletonList).orElse(new ArrayList<>());
+        List<Actors> partialMatches = actorsService.getActorsByNameContaining(partial);
+        exactMatches.addAll(partialMatches); // Combina corrispondenze esatte e parziali
+        return exactMatches;
     }
 
     @GetMapping("/movie")
