@@ -82,6 +82,11 @@ public class MoviesController {
         return moviesService.getMoviesByActorId(id);
     }
 
+    @GetMapping("/filter")
+    public ArrayList<Movies> getMoviesByDateCountriesGenreLanguageTheme(@RequestParam(required = false) Integer date,@RequestParam(required = false) Integer countries_id,@RequestParam(required = false) Integer genres_id,@RequestParam(required = false) Integer languages_id,@RequestParam(required = false) Integer themes_id){
+        return moviesService.getMoviesByDateCountriesGenreLanguageTheme(date,countries_id,genres_id,languages_id,themes_id);
+    }
+
     /*
     @GetMapping("/similar")
     public ArrayList<Movies> getMoviesByGenreId(@RequestParam Integer id) {
