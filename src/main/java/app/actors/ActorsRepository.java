@@ -25,6 +25,6 @@ public interface ActorsRepository extends JpaRepository<Actors,Integer>, PagingA
     @Query(value = "SELECT  a.*,count('actor_id') as movie_count FROM actors_movies ac join public.actors a on ac.actor_id = a.id group by a.id order by movie_count desc", nativeQuery = true)
     Page<Map<String, Object>> findMostPopularActorsList(Pageable pageable);
 
-    @Query("SELECT a FROM Actors a WHERE LOWER(a.name) LIKE LOWER(CONCAT('%', :partial, '%'))")
+    @Query("SELECT a FROM Actors a WHERE a.name ILIKE CONCAT('%', :partial, '%')")
     List<Actors> findActorsByNameContaining(@Param("partial") String partial);
 }
