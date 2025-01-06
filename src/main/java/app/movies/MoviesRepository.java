@@ -35,11 +35,4 @@ public interface MoviesRepository extends JpaRepository<Movies, Integer>, Paging
     Page<Movies> findMoviesByGenresId(Integer genresId, Pageable pageable);
 
 
-
-
-
-
-
-
-
 }

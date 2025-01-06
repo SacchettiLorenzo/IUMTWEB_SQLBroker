@@ -82,6 +82,25 @@ public class MoviesController {
         return moviesService.getMoviesByActorId(id);
     }
 
+    @GetMapping("/popular")
+    public List<Movies> getPopularMovies(
+            @RequestParam(value = "startYear", defaultValue = "2001") int startYear,
+            @RequestParam(value = "endYear", defaultValue = "2024") int endYear,
+            @RequestParam(value = "minRating", defaultValue = "4.0") double minRating,
+            @RequestParam(value = "limit", defaultValue = "50") int limit
+    ) {
+        List<Movies> allMovies = moviesService.findAllWithoutPagination(); // Usa il metodo aggiunto nel service
+
+        return allMovies.stream()
+                .filter(movie -> {
+                    Integer year = movie.getDate(); // Usa il campo Integer direttamente
+                    return year != null && year >= startYear && year <= endYear && movie.getRating() != null && movie.getRating() >= minRating;
+                })
+                .sorted(Comparator.comparingDouble(Movies::getRating).reversed()) // Ordina per rating decrescente
+                .limit(limit) // Limita a 50 film
+                .toList();
+    }
+
     /*
     @GetMapping("/similar")
     public ArrayList<Movies> getMoviesByGenreId(@RequestParam Integer id) {
