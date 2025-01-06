@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/countries")
@@ -45,12 +46,14 @@ public class CountriesController {
         }
         return countriesService.findAll(pageRequest);
     }
-
+    /*
     @GetMapping("/trending")
     public Page<Countries> getTopCountries(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
         PageRequest pageRequest = PageRequest.of(page, size, Sort.by("country").descending());
         return countriesService.findAll(pageRequest);
     }
+    */
+
 
     @GetMapping("/id")
     public ArrayList<Countries> getCountryById(@RequestParam Integer movieId) {
@@ -70,5 +73,10 @@ public class CountriesController {
     @DeleteMapping("/{id}")
     public void deleteCountry(@PathVariable Integer id) {
         countriesService.deleteCountry(id);
+    }
+
+    @GetMapping("/trending")
+    public List<Map<String, Object>> getTop10Countries() {
+        return countriesService.getTop10MostPopularCountries();
     }
 }

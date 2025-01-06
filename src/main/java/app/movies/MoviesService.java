@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -63,6 +64,14 @@ public class MoviesService {
         return moviesRepository.findMoviesByGenresId(genresId, pageRequest);
     }
 
+
+    public List<Map<String, Integer>> getTop10LongestMovies() {
+        return this.moviesRepository.findTop10LongestMovies();
+    }
+
+    public List<Map<String, Integer>> getTop10ShortestMovies() {
+        return this.moviesRepository.findTop10ShortestMovies();
+    }
 
 
 

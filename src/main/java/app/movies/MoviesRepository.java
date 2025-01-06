@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -33,6 +35,13 @@ public interface MoviesRepository extends JpaRepository<Movies, Integer>, Paging
     //ArrayList<Movies> findMoviesListByGenreIdOrderByDateDesc(Limit limit);
 
     Page<Movies> findMoviesByGenresId(Integer genresId, Pageable pageable);
+
+    @Query(value = "SELECT m.name, m.minute FROM movies m WHERE m.minute IS NOT NULL ORDER BY m.minute DESC LIMIT 10", nativeQuery = true)
+    List<Map<String, Integer>> findTop10LongestMovies();
+
+
+    @Query(value = "SELECT m.name, m.minute FROM movies m WHERE m.minute IS NOT NULL ORDER BY m.minute ASC LIMIT 10", nativeQuery = true)
+    List<Map<String, Integer>> findTop10ShortestMovies();
 
 
 

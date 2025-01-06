@@ -128,6 +128,16 @@ public class MoviesController {
     }
     */
 
+    @GetMapping("/top10-longest")
+    public List<Map<String, Integer>> getTop10LongestMovies() {
+        return moviesService.getTop10LongestMovies();
+    }
+
+    @GetMapping("/top10-shortest")
+    public List<Map<String, Integer>> getTop10ShortestMovies() {
+        return moviesService.getTop10ShortestMovies();
+    }
+
 }
 
 /*

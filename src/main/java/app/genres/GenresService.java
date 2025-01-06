@@ -34,8 +34,8 @@ public class GenresService {
         return genresRepository.findAll(pageRequest);
     }
 
-    public Page<Map<String, Object>> findMostPopularGenresList(Pageable pageable) {
-        return this.genresRepository.findMostPopularGenresList(pageable);
+    public List<Map<String, Object>> getTop10MostPopularGenres() {
+        return this.genresRepository.findTop10MostPopularGenres();
     }
 
 
