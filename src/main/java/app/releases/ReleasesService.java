@@ -42,4 +42,8 @@ public class ReleasesService {
     public void deleteRelease(Integer id) {
         releasesRepository.deleteById(id);
     }
+
+    public List<Releases> getReleasesByMoviesId(Integer id) {
+        releasesRepository.getReleasesByMoviesId(id);
+    }
 }

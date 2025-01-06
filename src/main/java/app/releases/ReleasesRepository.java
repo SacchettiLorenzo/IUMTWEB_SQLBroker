@@ -29,4 +29,6 @@ public interface ReleasesRepository extends JpaRepository<Releases, Integer>, Pa
 
     @Query ("SELECT DISTINCT r.country FROM Releases r")
     List<String> findDistinctCountry();
+
+    List<Releases> getReleasesByMoviesId(Integer movieId);
 }
