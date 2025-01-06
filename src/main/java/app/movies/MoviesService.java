@@ -73,6 +73,14 @@ public class MoviesService {
         return this.moviesRepository.findTop10ShortestMovies();
     }
 
+    public List<Map<Movies, Double>> getTop10BesMovies() {
+        return this.moviesRepository.findTop10BesMovies();
+    }
+
+    public List<Map<Movies, Double>> getTop10WorstMovies() {
+        return this.moviesRepository.findTop10WorstMovies();
+    }
+
 
 
 }

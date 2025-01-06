@@ -39,4 +39,8 @@ public class ActorsService {
     public Page<Map<String, Object>> findMostPopularActorsList(Pageable pageable) {
         return this.actorsRepository.findMostPopularActorsList(pageable);
     }
+
+    public List<Map<String, Object>> getTop10MostPopularActors() {
+        return this.actorsRepository.findTop10MostPopularActors();
+    }
 }

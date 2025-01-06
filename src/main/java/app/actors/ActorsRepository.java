@@ -24,4 +24,12 @@ public interface ActorsRepository extends JpaRepository<Actors,Integer>, PagingA
     @Query(value = "SELECT  a.*,count('actor_id') as movie_count FROM actors_movies ac join public.actors a on ac.actor_id = a.id group by a.id order by movie_count desc", nativeQuery = true)
     Page<Map<String, Object>> findMostPopularActorsList(Pageable pageable);
 
+
+    @Query(value = "SELECT a.id, a.name, COUNT(am.actor_id) AS actor_count " +
+            "FROM actors_movies am " +
+            "JOIN actors a ON am.actor_id = a.id " +
+            "GROUP BY a.id, a.name " +
+            "ORDER BY actor_count DESC " +
+            "LIMIT 10", nativeQuery = true)
+    List<Map<String, Object>> findTop10MostPopularActors();
 }

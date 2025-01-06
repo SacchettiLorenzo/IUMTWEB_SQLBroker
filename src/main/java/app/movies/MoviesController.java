@@ -138,6 +138,16 @@ public class MoviesController {
         return moviesService.getTop10ShortestMovies();
     }
 
+    @GetMapping("/top10-bestMovies")
+    public List<Map<Movies, Double>> getTop10BesMovies() {
+        return moviesService.getTop10BesMovies();
+    }
+
+    @GetMapping("/top10-worstMovies")
+    public List<Map<Movies, Double>> getTop10WorstMovies() {
+        return moviesService.getTop10WorstMovies();
+    }
+
 }
 
 /*

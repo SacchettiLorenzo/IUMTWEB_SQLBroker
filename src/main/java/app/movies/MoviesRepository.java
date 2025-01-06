@@ -43,8 +43,11 @@ public interface MoviesRepository extends JpaRepository<Movies, Integer>, Paging
     @Query(value = "SELECT m.id, m.name, m.minute FROM movies m WHERE m.minute IS NOT NULL ORDER BY m.minute ASC LIMIT 10", nativeQuery = true)
     List<Map<Movies, Integer>> findTop10ShortestMovies();
 
+    @Query(value = "SELECT m.id, m.name, m.rating FROM movies m WHERE m.rating IS NOT NULL ORDER BY m.rating DESC LIMIT 10", nativeQuery = true)
+    List<Map<Movies, Double>> findTop10BesMovies();
 
-
+    @Query(value = "SELECT m.id, m.name, m.rating FROM movies m WHERE m.rating IS NOT NULL ORDER BY m.rating ASC LIMIT 10", nativeQuery = true)
+    List<Map<Movies, Double>> findTop10WorstMovies();
 
 
 
