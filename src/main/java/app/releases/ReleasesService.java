@@ -44,6 +44,6 @@ public class ReleasesService {
     }
 
     public List<Releases> getReleasesByMoviesId(Integer id) {
-        releasesRepository.getReleasesByMoviesId(id);
+        return releasesRepository.getReleasesByMoviesId(id);
     }
 }

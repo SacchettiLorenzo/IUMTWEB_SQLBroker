@@ -60,9 +60,9 @@ public class ReleasesController {
         return releasesService.getReleasesByCountry(country);
     }
 
-    @GetMapping("/movie/{id}")
-    public List<Releases> getReleasesByMoviesId(@RequestParam(required = true) Integer id) {
-        return releasesService.getReleasesByMoviesId(id);
+    @GetMapping("/movie")
+    public List<Releases> getReleasesByMoviesId(@RequestParam(required = true) Integer movieId) {
+        return releasesService.getReleasesByMoviesId(movieId);
     }
 
     @GetMapping("/type")
