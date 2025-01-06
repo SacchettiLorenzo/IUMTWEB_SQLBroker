@@ -67,7 +67,7 @@ public class GenresController {
 
 
     @GetMapping("/trending")
-    public List<Map<String, Object>> getTop10Genres() {
+    public List<Map<Genres, Object>> getTop10Genres() {
         return genresService.getTop10MostPopularGenres();
     }
 

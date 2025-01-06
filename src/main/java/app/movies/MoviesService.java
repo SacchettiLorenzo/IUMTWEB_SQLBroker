@@ -65,11 +65,11 @@ public class MoviesService {
     }
 
 
-    public List<Map<String, Integer>> getTop10LongestMovies() {
+    public List<Map<Movies, Integer>> getTop10LongestMovies() {
         return this.moviesRepository.findTop10LongestMovies();
     }
 
-    public List<Map<String, Integer>> getTop10ShortestMovies() {
+    public List<Map<Movies, Integer>> getTop10ShortestMovies() {
         return this.moviesRepository.findTop10ShortestMovies();
     }
 

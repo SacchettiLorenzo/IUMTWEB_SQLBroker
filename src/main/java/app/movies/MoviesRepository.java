@@ -36,12 +36,12 @@ public interface MoviesRepository extends JpaRepository<Movies, Integer>, Paging
 
     Page<Movies> findMoviesByGenresId(Integer genresId, Pageable pageable);
 
-    @Query(value = "SELECT m.name, m.minute FROM movies m WHERE m.minute IS NOT NULL ORDER BY m.minute DESC LIMIT 10", nativeQuery = true)
-    List<Map<String, Integer>> findTop10LongestMovies();
+    @Query(value = "SELECT m.id, m.name, m.minute FROM movies m WHERE m.minute IS NOT NULL ORDER BY m.minute DESC LIMIT 10", nativeQuery = true)
+    List<Map<Movies, Integer>> findTop10LongestMovies();
 
 
-    @Query(value = "SELECT m.name, m.minute FROM movies m WHERE m.minute IS NOT NULL ORDER BY m.minute ASC LIMIT 10", nativeQuery = true)
-    List<Map<String, Integer>> findTop10ShortestMovies();
+    @Query(value = "SELECT m.id, m.name, m.minute FROM movies m WHERE m.minute IS NOT NULL ORDER BY m.minute ASC LIMIT 10", nativeQuery = true)
+    List<Map<Movies, Integer>> findTop10ShortestMovies();
 
 
 
