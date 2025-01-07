@@ -2,9 +2,7 @@ package app.movies;
 
 import com.fasterxml.jackson.databind.ser.std.StdKeySerializers;
 import org.springframework.boot.context.properties.bind.DefaultValue;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -99,8 +97,9 @@ public class MoviesController {
             @RequestParam(value = "minRating", defaultValue = "4.0") double minRating,
             @RequestParam(value = "limit", defaultValue = "50") int limit
     ) {
-        List<Movies> allMovies = moviesService.findAllWithoutPagination(); // Usa il metodo aggiunto nel service
+        //List<Movies> allMovies = moviesService.findAllWithoutPagination(); // Usa il metodo aggiunto nel service
 
+        /*
         return allMovies.stream()
                 .filter(movie -> {
                     Integer year = movie.getDate(); // Usa il campo Integer direttamente
@@ -109,6 +108,9 @@ public class MoviesController {
                 .sorted(Comparator.comparingDouble(Movies::getRating).reversed()) // Ordina per rating decrescente
                 .limit(limit) // Limita a 50 film
                 .toList();
+
+         */
+        return moviesService.getMostPopularMovies(startYear,endYear, (float) minRating, Limit.of(limit));
     }
 
     /*
