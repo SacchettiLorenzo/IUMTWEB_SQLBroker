@@ -75,6 +75,11 @@ public class ActorsController {
         return actorsService.findMostPopularActorsList(pageRequest);
     }
 
+    @GetMapping("/top10-mostPopularActors")
+    public List<Map<String, Object>> getTop10MostPopularActors() {
+        return actorsService.getTop10MostPopularActors();
+    }
+
 
 
 }

@@ -67,17 +67,9 @@ public class GenresController {
 
 
     @GetMapping("/trending")
-    public Page<Map<String, Object>> getTopGenres(@RequestParam int page, @RequestParam int size) {
-        PageRequest pageRequest = PageRequest.of(page, size);
-        return genresService.findMostPopularGenresList(pageRequest);
+    public List<Map<Genres, Object>> getTop10Genres() {
+        return genresService.getTop10MostPopularGenres();
     }
-
-
-
-
-
-
-
 
 
 }

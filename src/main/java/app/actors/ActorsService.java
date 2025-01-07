@@ -43,4 +43,8 @@ public class ActorsService {
     public List<Actors> getActorsByNameContaining(String partial) {
         return actorsRepository.findActorsByNameContaining(partial);
     }
+
+    public List<Map<String, Object>> getTop10MostPopularActors() {
+        return this.actorsRepository.findTop10MostPopularActors();
+    }
 }

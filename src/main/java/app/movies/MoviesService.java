@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -71,6 +72,27 @@ public class MoviesService {
 
     public ArrayList<Movies> getMoviesByDate(Integer date) {
         return moviesRepository.findByDate(date);
+    }
+
+    public List<Map<Movies, Integer>> getTop10LongestMovies(Integer countryId, Integer genreId, Integer languageId) {
+        return this.moviesRepository.findTop10LongestMovies(countryId, genreId, languageId);
+    }
+
+    public List<Map<Movies, Integer>> getTop10ShortestMovies(Integer countryId, Integer genreId, Integer languageId) {
+        return this.moviesRepository.findTop10ShortestMovies(countryId, genreId, languageId);
+    }
+    /*
+    public List<Map<Movies, Double>> getTop10BestMovies() {
+        return this.moviesRepository.findTop10BestMovies();
+    }
+     */
+
+    public List<Map<Movies, Double>> getTop10BestMoviesByFilters(Integer countryId, Integer genreId, Integer languageId) {
+        return moviesRepository.findTop10BestMoviesByFilters(countryId, genreId, languageId);
+    }
+
+    public List<Map<Movies, Double>> getTop10WorstMoviesByFilters(Integer countryId, Integer genreId, Integer languageId) {
+        return this.moviesRepository.findTop10WorstMoviesByFilters(countryId, genreId, languageId);
     }
 
 

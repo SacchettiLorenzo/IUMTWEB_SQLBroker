@@ -25,9 +25,14 @@ public interface GenresRepository extends JpaRepository<Genres, Integer>, Paging
 
     ArrayList<Genres> findGenresListByMoviesId(Integer id);
 
-    @Query(value = "SELECT  a.*,count('genre_id') as movie_count " +
-            "FROM genres_movies ac join public.genres a on ac.genre_id = a.id group by a.id order by movie_count desc", nativeQuery = true)
-    Page<Map<String, Object>> findMostPopularGenresList(Pageable pageable);
+    @Query(value = "SELECT g.id ,g.genre, COUNT(gm.genre_id) AS movie_count " +
+            "FROM genres_movies gm " +
+            "JOIN genres g ON gm.genre_id = g.id " +
+            "GROUP BY g.id, g.genre " +
+            "ORDER BY movie_count DESC " +
+            "LIMIT 10", nativeQuery = true)
+    List<Map<Genres, Object>> findTop10MostPopularGenres();
+
 
 
 
