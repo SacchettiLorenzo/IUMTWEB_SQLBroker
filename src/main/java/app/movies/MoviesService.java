@@ -82,8 +82,8 @@ public class MoviesService {
         return moviesRepository.findTop10BestMoviesByFilters(countryId, genreId, languageId);
     }
 
-    public List<Map<Movies, Double>> getTop10WorstMovies() {
-        return this.moviesRepository.findTop10WorstMovies();
+    public List<Map<Movies, Double>> getTop10WorstMoviesByFilters(Integer countryId, Integer genreId, Integer languageId) {
+        return this.moviesRepository.findTop10WorstMoviesByFilters(countryId, genreId, languageId);
     }
 
 

@@ -49,8 +49,23 @@ public interface MoviesRepository extends JpaRepository<Movies, Integer>, Paging
     List<Map<Movies, Double>> findTop10BestMovies();
      */
 
-    @Query(value = "SELECT m.id, m.name, m.rating FROM movies m WHERE m.rating IS NOT NULL ORDER BY m.rating ASC LIMIT 10", nativeQuery = true)
-    List<Map<Movies, Double>> findTop10WorstMovies();
+    @Query(value = """
+    SELECT m.id, m.name, m.rating
+    FROM movies m
+    INNER JOIN countries_movies cm ON m.id = cm.movie_id
+    INNER JOIN genres_movies gm ON m.id = gm.movie_id
+    INNER JOIN languages_movies lm ON m.id = lm.movie_id
+    WHERE m.rating IS NOT NULL
+    AND (:countryId IS NULL OR cm.country_id = :countryId)
+    AND (:genreId IS NULL OR gm.genre_id = :genreId)
+    AND (:languageId IS NULL OR lm.language_id = :languageId)
+    GROUP BY m.id, m.name, m.rating
+    ORDER BY m.rating ASC
+    LIMIT 10
+    """, nativeQuery = true)
+    List<Map<Movies, Double>> findTop10WorstMoviesByFilters(@Param("countryId") Integer countryId,
+                                                   @Param("genreId") Integer genreId,
+                                                   @Param("languageId") Integer languageId);
 
     @Query(value = """
     SELECT m.id, m.name, m.rating

@@ -151,12 +151,15 @@ public class MoviesController {
             @RequestParam(required = false) Integer genreId,
             @RequestParam(required = false) Integer languageId) {
 
-        return moviesService.getTop10BestMoviesByFilters(countryId, genreId, languageId);
+        return moviesService.getTop10WorstMoviesByFilters(countryId, genreId, languageId);
     }
 
-    @GetMapping("/top10-worstMovies")
-    public List<Map<Movies, Double>> getTop10WorstMovies() {
-        return moviesService.getTop10WorstMovies();
+    @GetMapping("/worst10ByIds")
+    public List<Map<Movies, Double>> getTop10WorstMoviesByFilters(
+            @RequestParam(required = false) Integer countryId,
+            @RequestParam(required = false) Integer genreId,
+            @RequestParam(required = false) Integer languageId) {
+        return moviesService.getTop10WorstMoviesByFilters(countryId, genreId, languageId);
     }
 
 }
