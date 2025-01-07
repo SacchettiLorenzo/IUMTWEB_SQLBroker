@@ -37,7 +37,6 @@ public interface MoviesRepository extends JpaRepository<Movies, Integer>, Paging
 
     Page<Movies> findMoviesByGenresId(Integer genresId, Pageable pageable);
 
-
     //tried with example matcher but cant figure out how to handle null params
     @Query(value = "select m from Movies m " +
             "inner join m.countries countries " +
@@ -51,7 +50,7 @@ public interface MoviesRepository extends JpaRepository<Movies, Integer>, Paging
             "and (:themes_id is null or themes.id = :themes_id)")
     ArrayList<Movies> findMoviesListByDateAndCountriesIdAndGenresIdAndLanguagesIdAndThemesId(@Param("date") Integer date,@Param("countries_id") Integer countries_id,@Param("genres_id") Integer genres_id,@Param("languages_id") Integer languages_id,@Param("themes_id") Integer themes_id);
 
-
+    ArrayList<Movies> findByDate(Integer date);
 
 
 
