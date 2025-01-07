@@ -138,9 +138,20 @@ public class MoviesController {
         return moviesService.getTop10ShortestMovies();
     }
 
+    /*
     @GetMapping("/top10-bestMovies")
-    public List<Map<Movies, Double>> getTop10BesMovies() {
-        return moviesService.getTop10BesMovies();
+    public List<Map<Movies, Double>> getTop10BestMovies() {
+        return moviesService.getTop10BestMovies();
+    }
+     */
+
+    @GetMapping("/top10ByIds")
+    public List<Map<Movies, Double>> getTop10BestMoviesByFilters(
+            @RequestParam(required = false) Integer countryId,
+            @RequestParam(required = false) Integer genreId,
+            @RequestParam(required = false) Integer languageId) {
+
+        return moviesService.getTop10BestMoviesByFilters(countryId, genreId, languageId);
     }
 
     @GetMapping("/top10-worstMovies")
