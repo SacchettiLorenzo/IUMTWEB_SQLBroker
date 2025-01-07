@@ -74,6 +74,9 @@ public class MoviesService {
     }
 
 
+    public ArrayList<Movies> getMostPopularMovies(Integer dateBefore, Integer dateAfter, Float rating, Limit limit) {
+        return moviesRepository.findMoviesListByDateBetweenAndRatingGreaterThanEqualOrderByRatingDesc(dateBefore, dateAfter, rating, limit);
+    }
 
 
 }
