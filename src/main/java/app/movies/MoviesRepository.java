@@ -51,11 +51,4 @@ public interface MoviesRepository extends JpaRepository<Movies, Integer>, Paging
     ArrayList<Movies> findMoviesListByDateAndCountriesIdAndGenresIdAndLanguagesIdAndThemesId(@Param("date") Integer date,@Param("countries_id") Integer countries_id,@Param("genres_id") Integer genres_id,@Param("languages_id") Integer languages_id,@Param("themes_id") Integer themes_id);
 
     ArrayList<Movies> findByDate(Integer date);
-
-
-
-
-
-
-
 }

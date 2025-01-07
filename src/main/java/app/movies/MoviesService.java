@@ -60,6 +60,10 @@ public class MoviesService {
         return moviesRepository.findMoviesListByDateAndCountriesIdAndGenresIdAndLanguagesIdAndThemesId(date, countries_id, genres_id, languages_id, themes_id);
     }
 
+    // Metodo per ottenere tutti i film senza paginazione
+    public List<Movies> findAllWithoutPagination() {
+        return moviesRepository.findAll();
+    }
 
     public Page<Movies> getMoviesByGenreId(Integer genresId, PageRequest pageRequest) {
         return moviesRepository.findMoviesByGenresId(genresId, pageRequest);

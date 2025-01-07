@@ -60,10 +60,8 @@ public class ActorsController {
         if (partial == null || partial.isEmpty()) {
             return new ArrayList<>(); // Restituisce un elenco vuoto se la query è vuota
         }
-        List<Actors> exactMatches = actorsService.getActorByName(partial).map(Collections::singletonList).orElse(new ArrayList<>());
         List<Actors> partialMatches = actorsService.getActorsByNameContaining(partial);
-        exactMatches.addAll(partialMatches); // Combina corrispondenze esatte e parziali
-        return exactMatches;
+        return partialMatches;
     }
 
     @GetMapping("/movie")
