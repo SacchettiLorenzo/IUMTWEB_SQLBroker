@@ -128,14 +128,20 @@ public class MoviesController {
     }
     */
 
-    @GetMapping("/top10-longest")
-    public List<Map<Movies, Integer>> getTop10LongestMovies() {
-        return moviesService.getTop10LongestMovies();
+    @GetMapping("/top10Longest")
+    public List<Map<Movies, Integer>> getTop10LongestMovies(
+            @RequestParam(required = false) Integer countryId,
+            @RequestParam(required = false) Integer genreId,
+            @RequestParam(required = false) Integer languageId) {
+        return moviesService.getTop10LongestMovies(countryId, genreId, languageId);
     }
 
-    @GetMapping("/top10-shortest")
-    public List<Map<Movies, Integer>> getTop10ShortestMovies() {
-        return moviesService.getTop10ShortestMovies();
+    @GetMapping("/top10Shortest")
+    public List<Map<Movies, Integer>> getTop10ShortestMovies(
+            @RequestParam(required = false) Integer countryId,
+            @RequestParam(required = false) Integer genreId,
+            @RequestParam(required = false) Integer languageId) {
+        return moviesService.getTop10ShortestMovies(countryId, genreId, languageId);
     }
 
     /*
@@ -151,7 +157,7 @@ public class MoviesController {
             @RequestParam(required = false) Integer genreId,
             @RequestParam(required = false) Integer languageId) {
 
-        return moviesService.getTop10WorstMoviesByFilters(countryId, genreId, languageId);
+        return moviesService.getTop10BestMoviesByFilters(countryId, genreId, languageId);
     }
 
     @GetMapping("/worst10ByIds")
