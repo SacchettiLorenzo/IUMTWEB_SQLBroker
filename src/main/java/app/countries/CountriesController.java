@@ -76,7 +76,7 @@ public class CountriesController {
     }
 
     @GetMapping("/trending")
-    public List<Map<String, Object>> getTop10Countries() {
+    public List<Map<Countries, Object>> getTop10Countries() {
         return countriesService.getTop10MostPopularCountries();
     }
 }

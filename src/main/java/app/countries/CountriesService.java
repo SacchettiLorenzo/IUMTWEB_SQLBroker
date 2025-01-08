@@ -41,7 +41,7 @@ public class CountriesService {
         countriesRepository.deleteById(id);
     }
 
-    public List<Map<String, Object>> getTop10MostPopularCountries() {
+    public List<Map<Countries, Object>> getTop10MostPopularCountries() {
         return this.countriesRepository.findTop10MostPopularCountries();
     }
 }

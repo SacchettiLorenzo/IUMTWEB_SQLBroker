@@ -41,11 +41,11 @@ public interface CountriesRepository extends JpaRepository<Countries, Integer>, 
     List<Countries> findTop10Countries(Pageable pageable);
 
 
-    @Query(value = "SELECT c.country, COUNT(cm.country_id) AS movie_count " +
+    @Query(value = "SELECT c.id, c.country, COUNT(cm.country_id) AS movie_count " +
             "FROM countries_movies cm " +
             "JOIN countries c ON cm.country_id = c.id " +
             "GROUP BY c.id, c.country " +
             "ORDER BY movie_count DESC " +
             "LIMIT 10", nativeQuery = true)
-    List<Map<String, Object>> findTop10MostPopularCountries();
+    List<Map<Countries, Object>> findTop10MostPopularCountries();
 }
