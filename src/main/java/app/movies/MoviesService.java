@@ -75,11 +75,11 @@ public class MoviesService {
     }
 
     public List<Map<Movies, Integer>> getTop10LongestMovies(Integer countryId, Integer genreId, Integer languageId) {
-        return this.moviesRepository.findTop10LongestMovies(countryId, genreId, languageId);
+        return this.moviesRepository.findTopLongestMovies(countryId, genreId, languageId, Limit.of(10));
     }
 
     public List<Map<Movies, Integer>> getTop10ShortestMovies(Integer countryId, Integer genreId, Integer languageId) {
-        return this.moviesRepository.findTop10ShortestMovies(countryId, genreId, languageId);
+        return this.moviesRepository.findTopShortestMovies(countryId, genreId, languageId,Limit.of(10));
     }
     /*
     public List<Map<Movies, Double>> getTop10BestMovies() {
@@ -88,11 +88,11 @@ public class MoviesService {
      */
 
     public List<Map<Movies, Double>> getTop10BestMoviesByFilters(Integer countryId, Integer genreId, Integer languageId) {
-        return moviesRepository.findTop10BestMoviesByFilters(countryId, genreId, languageId);
+        return moviesRepository.findTopBestMoviesByFilters(countryId, genreId, languageId,Limit.of(10));
     }
 
     public List<Map<Movies, Double>> getTop10WorstMoviesByFilters(Integer countryId, Integer genreId, Integer languageId) {
-        return this.moviesRepository.findTop10WorstMoviesByFilters(countryId, genreId, languageId);
+        return this.moviesRepository.findTopWorstMoviesByFilters(countryId, genreId, languageId,Limit.of(10));
     }
 
 

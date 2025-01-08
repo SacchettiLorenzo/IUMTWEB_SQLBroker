@@ -60,13 +60,13 @@ public interface MoviesRepository extends JpaRepository<Movies, Integer>, Paging
     AND (:countryId IS NULL OR cm.country_id = :countryId)
     AND (:genreId IS NULL OR gm.genre_id = :genreId)
     AND (:languageId IS NULL OR lm.language_id = :languageId)
-    GROUP BY m.id, m.name, m.minute
+    GROUP BY m.id
     ORDER BY m.minute DESC
-    LIMIT 10
     """, nativeQuery = true)
-    List<Map<Movies, Integer>> findTop10LongestMovies(@Param("countryId") Integer countryId,
+    List<Map<Movies, Integer>> findTopLongestMovies(@Param("countryId") Integer countryId,
                                                       @Param("genreId") Integer genreId,
-                                                      @Param("languageId") Integer languageId);
+                                                      @Param("languageId") Integer languageId,
+                                                      Limit limit);
 
 
     @Query(value = """
@@ -79,13 +79,13 @@ public interface MoviesRepository extends JpaRepository<Movies, Integer>, Paging
     AND (:countryId IS NULL OR cm.country_id = :countryId)
     AND (:genreId IS NULL OR gm.genre_id = :genreId)
     AND (:languageId IS NULL OR lm.language_id = :languageId)
-    GROUP BY m.id, m.name, m.minute
+    GROUP BY m.id
     ORDER BY m.minute ASC
-    LIMIT 10
     """, nativeQuery = true)
-    List<Map<Movies, Integer>> findTop10ShortestMovies(@Param("countryId") Integer countryId,
+    List<Map<Movies, Integer>> findTopShortestMovies(@Param("countryId") Integer countryId,
                                                        @Param("genreId") Integer genreId,
-                                                       @Param("languageId") Integer languageId);
+                                                       @Param("languageId") Integer languageId,
+                                                        Limit limit);
 
     /*
     @Query(value = "SELECT m.id, m.name, m.rating FROM movies m WHERE m.rating IS NOT NULL ORDER BY m.rating DESC LIMIT 10", nativeQuery = true)
@@ -102,13 +102,13 @@ public interface MoviesRepository extends JpaRepository<Movies, Integer>, Paging
     AND (:countryId IS NULL OR cm.country_id = :countryId)
     AND (:genreId IS NULL OR gm.genre_id = :genreId)
     AND (:languageId IS NULL OR lm.language_id = :languageId)
-    GROUP BY m.id, m.name, m.rating
+    GROUP BY m.id
     ORDER BY m.rating ASC
-    LIMIT 10
     """, nativeQuery = true)
-    List<Map<Movies, Double>> findTop10WorstMoviesByFilters(@Param("countryId") Integer countryId,
+    List<Map<Movies, Double>> findTopWorstMoviesByFilters(@Param("countryId") Integer countryId,
                                                    @Param("genreId") Integer genreId,
-                                                   @Param("languageId") Integer languageId);
+                                                   @Param("languageId") Integer languageId,
+                                                            Limit limit);
 
     @Query(value = """
     SELECT m.id, m.name, m.rating
@@ -120,14 +120,14 @@ public interface MoviesRepository extends JpaRepository<Movies, Integer>, Paging
     AND (:countryId IS NULL OR cm.country_id = :countryId)
     AND (:genreId IS NULL OR gm.genre_id = :genreId)
     AND (:languageId IS NULL OR lm.language_id = :languageId)
-    GROUP BY m.id, m.name, m.rating
+    GROUP BY m.id
     ORDER BY m.rating DESC
-    LIMIT 10
     """, nativeQuery = true)
-    List<Map<Movies, Double>> findTop10BestMoviesByFilters(
+    List<Map<Movies, Double>> findTopBestMoviesByFilters(
             @Param("countryId") Integer countryId,
             @Param("genreId") Integer genreId,
-            @Param("languageId") Integer languageId
+            @Param("languageId") Integer languageId,
+            Limit limit
     );
 
 
