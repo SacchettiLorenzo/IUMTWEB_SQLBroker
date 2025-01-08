@@ -81,7 +81,7 @@ public class MoviesController {
     }
 
     @GetMapping("/filter")
-    public ArrayList<Movies> getMoviesByDateCountriesGenreLanguageTheme(@RequestParam(required = false) Integer date,@RequestParam(required = false) Integer countries_id,@RequestParam(required = false) Integer genres_id,@RequestParam(required = false) Integer languages_id,@RequestParam(required = false) Integer themes_id){
+    public List<Movies> getMoviesByDateCountriesGenreLanguageTheme(@RequestParam(required = false) Integer date,@RequestParam(required = false) Integer countries_id,@RequestParam(required = false) Integer genres_id,@RequestParam(required = false) Integer languages_id,@RequestParam(required = false) Integer themes_id){
         return moviesService.getMoviesByDateCountriesGenreLanguageTheme(date,countries_id,genres_id,languages_id,themes_id);
     }
 
@@ -160,7 +160,7 @@ public class MoviesController {
     */
 
     @GetMapping("/top10Longest")
-    public List<Map<Movies, Integer>> getTop10LongestMovies(
+    public List<Movies> getTop10LongestMovies(
             @RequestParam(required = false) Integer countryId,
             @RequestParam(required = false) Integer genreId,
             @RequestParam(required = false) Integer languageId) {
@@ -168,7 +168,7 @@ public class MoviesController {
     }
 
     @GetMapping("/top10Shortest")
-    public List<Map<Movies, Integer>> getTop10ShortestMovies(
+    public List<Movies> getTop10ShortestMovies(
             @RequestParam(required = false) Integer countryId,
             @RequestParam(required = false) Integer genreId,
             @RequestParam(required = false) Integer languageId) {
@@ -183,7 +183,7 @@ public class MoviesController {
      */
 
     @GetMapping("/top10ByIds")
-    public List<Map<Movies, Double>> getTop10BestMoviesByFilters(
+    public List<Movies> getTop10BestMoviesByFilters(
             @RequestParam(required = false) Integer countryId,
             @RequestParam(required = false) Integer genreId,
             @RequestParam(required = false) Integer languageId) {
@@ -192,7 +192,7 @@ public class MoviesController {
     }
 
     @GetMapping("/worst10ByIds")
-    public List<Map<Movies, Double>> getTop10WorstMoviesByFilters(
+    public List<Movies> getTop10WorstMoviesByFilters(
             @RequestParam(required = false) Integer countryId,
             @RequestParam(required = false) Integer genreId,
             @RequestParam(required = false) Integer languageId) {

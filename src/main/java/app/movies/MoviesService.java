@@ -57,8 +57,8 @@ public class MoviesService {
     }
     */
 
-    public ArrayList<Movies> getMoviesByDateCountriesGenreLanguageTheme(Integer date, Integer countries_id, Integer genres_id, Integer languages_id, Integer themes_id){
-        return moviesRepository.findMoviesListByDateAndCountriesIdAndGenresIdAndLanguagesIdAndThemesId(date, countries_id, genres_id, languages_id, themes_id);
+    public List<Movies> getMoviesByDateCountriesGenreLanguageTheme(Integer date, Integer countries_id, Integer genres_id, Integer languages_id, Integer themes_id){
+        return moviesRepository.findMoviesListByDateAndCountriesIdAndGenresIdAndLanguagesIdAndThemesId_Left(date, countries_id, genres_id, languages_id, themes_id,null).getContent();
     }
 
     // Metodo per ottenere tutti i film senza paginazione
@@ -74,12 +74,12 @@ public class MoviesService {
         return moviesRepository.findByDate(date);
     }
 
-    public List<Map<Movies, Integer>> getTop10LongestMovies(Integer countryId, Integer genreId, Integer languageId) {
-        return this.moviesRepository.findTop10LongestMovies(countryId, genreId, languageId);
+    public List<Movies> getTop10LongestMovies(Integer countryId, Integer genreId, Integer languageId) {
+        return this.moviesRepository.findMoviesListByDateAndCountriesIdAndGenresIdAndLanguagesIdAndThemesId_Left(null,countryId, genreId, languageId,null,PageRequest.of(0, 10,Sort.by(Sort.Direction.DESC, "minute"))).getContent();
     }
 
-    public List<Map<Movies, Integer>> getTop10ShortestMovies(Integer countryId, Integer genreId, Integer languageId) {
-        return this.moviesRepository.findTop10ShortestMovies(countryId, genreId, languageId);
+    public List<Movies> getTop10ShortestMovies(Integer countryId, Integer genreId, Integer languageId) {
+        return this.moviesRepository.findMoviesListByDateAndCountriesIdAndGenresIdAndLanguagesIdAndThemesId_Left(null,countryId, genreId, languageId,null,PageRequest.of(0, 10,Sort.by(Sort.Direction.ASC, "minute"))).getContent();
     }
     /*
     public List<Map<Movies, Double>> getTop10BestMovies() {
@@ -87,12 +87,12 @@ public class MoviesService {
     }
      */
 
-    public List<Map<Movies, Double>> getTop10BestMoviesByFilters(Integer countryId, Integer genreId, Integer languageId) {
-        return moviesRepository.findTop10BestMoviesByFilters(countryId, genreId, languageId);
+    public List<Movies> getTop10BestMoviesByFilters(Integer countryId, Integer genreId, Integer languageId) {
+        return this.moviesRepository.findMoviesListByDateAndCountriesIdAndGenresIdAndLanguagesIdAndThemesId_Left(null,countryId, genreId, languageId,null,PageRequest.of(0, 10,Sort.by("rating").descending())).getContent();
     }
 
-    public List<Map<Movies, Double>> getTop10WorstMoviesByFilters(Integer countryId, Integer genreId, Integer languageId) {
-        return this.moviesRepository.findTop10WorstMoviesByFilters(countryId, genreId, languageId);
+    public List<Movies> getTop10WorstMoviesByFilters(Integer countryId, Integer genreId, Integer languageId) {
+        return this.moviesRepository.findMoviesListByDateAndCountriesIdAndGenresIdAndLanguagesIdAndThemesId_Left(null,countryId, genreId, languageId,null,PageRequest.of(0, 10,Sort.by(Sort.Direction.ASC, "rating"))).getContent();
     }
 
 
