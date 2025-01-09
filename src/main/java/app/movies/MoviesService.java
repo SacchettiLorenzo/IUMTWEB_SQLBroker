@@ -51,12 +51,6 @@ public class MoviesService {
         return moviesRepository.findMoviesListByActorsId(id);
     }
 
-    /*
-    public ArrayList<Movies> getMoviesByGenreId(int id) {
-        return moviesRepository.findMoviesListByGenreIdOrderByDateDesc(Limit.of(10));
-    }
-    */
-
     public List<Movies> getMoviesByDateCountriesGenreLanguageTheme(Integer date, Integer countries_id, Integer genres_id, Integer languages_id, Integer themes_id){
         return moviesRepository.findMoviesListByDateAndCountriesIdAndGenresIdAndLanguagesIdAndThemesId_Left(date, countries_id, genres_id, languages_id, themes_id,null).getContent();
     }
@@ -81,11 +75,6 @@ public class MoviesService {
     public List<Movies> getTop10ShortestMovies(Integer countryId, Integer genreId, Integer languageId) {
         return this.moviesRepository.findMoviesListByDateAndCountriesIdAndGenresIdAndLanguagesIdAndThemesId_Left(null,countryId, genreId, languageId,null,PageRequest.of(0, 10,Sort.by(Sort.Direction.ASC, "minute"))).getContent();
     }
-    /*
-    public List<Map<Movies, Double>> getTop10BestMovies() {
-        return this.moviesRepository.findTop10BestMovies();
-    }
-     */
 
     public List<Movies> getTop10BestMoviesByFilters(Integer countryId, Integer genreId, Integer languageId) {
         return this.moviesRepository.findMoviesListByDateAndCountriesIdAndGenresIdAndLanguagesIdAndThemesId_Left(null,countryId, genreId, languageId,null,PageRequest.of(0, 10,Sort.by("rating").descending())).getContent();

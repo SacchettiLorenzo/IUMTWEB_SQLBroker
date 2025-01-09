@@ -23,6 +23,10 @@ public class ActorsController {
 
     List<String> classFields = new ArrayList<>();
 
+    /**
+     * Constructor, compile the list of field name of the class
+     * @param actorsService
+     */
     public ActorsController(ActorsService actorsService) {
         this.actorsService = actorsService;
         for (Field field : Actors.class.getDeclaredFields()) {
@@ -30,6 +34,14 @@ public class ActorsController {
         }
     }
 
+    /**
+     * get a Page of Actors
+     * @param page
+     * @param size
+     * @param sortParam
+     * @param sortDirection
+     * @return Page<Actors>
+     */
     @GetMapping
     public Page<Actors> findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size, @RequestParam(required = false, defaultValue = "Id") String sortParam, @RequestParam(required = false, defaultValue = "ASC") String sortDirection){
         PageRequest pageRequest = PageRequest.of(page, size);
@@ -50,11 +62,21 @@ public class ActorsController {
         return actorsService.findAll(pageRequest);
     }
 
+    /**
+     * get a single actor using id
+     * @param id
+     * @return Actors
+     */
     @GetMapping("/id")
     public Actors getMovieById(@RequestParam Integer id) {
         return actorsService.getActorById(id).orElse(null);
     }
 
+    /**
+     * get a list of movie with name containing parameter partial
+     * @param partial
+     * @return List<Actors>
+     */
     @GetMapping("/name")
     public List<Actors> getActorsByPartialName(@RequestParam String partial) {
         if (partial == null || partial.isEmpty()) {
@@ -64,6 +86,11 @@ public class ActorsController {
         return partialMatches;
     }
 
+    /**
+     * get all the actors that worked for a movie
+     * @param movieId
+     * @return ArrayList<Actors>
+     */
     @GetMapping("/movie")
     public ArrayList<Actors> getActorsByMovieId(@RequestParam Integer movieId) {
         return actorsService.getActorsByMovieId(movieId);
@@ -75,6 +102,10 @@ public class ActorsController {
         return actorsService.findMostPopularActorsList(pageRequest);
     }
 
+    /**
+     * get 10 most popular actors with movie count
+     * @return List<Map<String, Object>>
+     */
     @GetMapping("/top10-mostPopularActors")
     public List<Map<String, Object>> getTop10MostPopularActors() {
         return actorsService.getTop10MostPopularActors();

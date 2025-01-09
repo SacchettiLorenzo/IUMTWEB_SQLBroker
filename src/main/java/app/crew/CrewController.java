@@ -22,6 +22,10 @@ public class CrewController {
 
     List<String> classFields = new ArrayList<>();
 
+    /**
+     * Constructor, compile the list of field name of the class
+     * @param crewService
+     */
     public CrewController(CrewService crewService) {
         this.crewService = crewService;
         for (Field field : Crew.class.getDeclaredFields()) {
@@ -29,6 +33,14 @@ public class CrewController {
         }
     }
 
+    /**
+     * get a Page of crew
+     * @param page
+     * @param size
+     * @param sortParam
+     * @param sortDirection
+     * @return Page<Crew>
+     */
     @GetMapping
     public Page<Crew> findAll (@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size, @RequestParam(required = false, defaultValue = "Id") String sortParam, @RequestParam(required = false, defaultValue = "ASC") String sortDirection){
         PageRequest pageRequest = PageRequest.of(page, size);
@@ -49,16 +61,21 @@ public class CrewController {
         return crewService.findAll(pageRequest);
     }
 
+    /**
+     * get a single crew member using id
+     * @param id
+     * @return Crew
+     */
     @GetMapping("/id")
     public Crew getCrewById(@RequestParam Integer id){
         return crewService.getCrewById(id).orElse(null);
     }
 
-    @GetMapping("/name")
-    public Crew getCrewByName(@RequestParam String name) {
-        return crewService.getCrewByName(name).orElse(null);
-    }
-
+    /**
+     * get all crew members that worked for a movie
+     * @param movieId
+     * @return ArrayList<Crew>
+     */
     @GetMapping("/movie")
     public ArrayList<Crew> getCrewsByMovieId(@RequestParam Integer movieId) {
         return crewService.getActorsByMovieId(movieId);

@@ -24,6 +24,10 @@ public class MoviesController {
 
     List<String> classFields = new ArrayList<>();
 
+    /**
+     * Constructor, compile the list of field name of the class
+     * @param moviesService
+     */
     public MoviesController(MoviesService moviesService) {
         this.moviesService = moviesService;
         for (Field field : Movies.class.getDeclaredFields()) {
@@ -31,6 +35,14 @@ public class MoviesController {
         }
     }
 
+    /**
+     * get a Page of movies
+     * @param page
+     * @param size
+     * @param sortParam
+     * @param sortDirection
+     * @return Page<Movie>
+     */
     @GetMapping
     public Page<Movies> findAll (@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size, @RequestParam(required = false, defaultValue = "Id") String sortParam, @RequestParam(required = false, defaultValue = "ASC") String sortDirection) {
         PageRequest pageRequest = PageRequest.of(page, size);
@@ -51,17 +63,28 @@ public class MoviesController {
         return moviesService.findAll(pageRequest);
     }
 
+
     @GetMapping("/trending")
     public Page<Movies> getTopMovies(@RequestParam int page, @RequestParam int size){
         PageRequest pageRequest = PageRequest.of(page, size, Sort.by("rating").descending());
         return moviesService.findAll(pageRequest);
     }
 
+    /**
+     * get a single movie using id
+     * @param id
+     * @return Movies
+     */
     @GetMapping("/id")
     public Movies getMovieById(@RequestParam Integer id) {
         return moviesService.getMovieById(id).orElse(null);
     }
 
+    /**
+     * get a list of movie with title containing parameter partial
+     * @param partial
+     * @return ArrayList<Movies>
+     */
     @GetMapping("/name")
     public ArrayList<Movies> getMovieByName(@RequestParam String partial) {
         ArrayList<Movies> res = new ArrayList<>();
@@ -75,21 +98,48 @@ public class MoviesController {
         return res;
     }
 
+    /**
+     * get the movies in which the actor participated
+     * @param id id of the actor
+     * @return ArrayList<Movies>
+     */
     @GetMapping("/actor")
     public ArrayList<Movies> getMovieByActorId(@RequestParam Integer id) {
         return moviesService.getMoviesByActorId(id);
     }
 
+    /**
+     * get a list of movies with specific characteristics
+     * @param date
+     * @param countries_id
+     * @param genres_id
+     * @param languages_id
+     * @param themes_id
+     * @return List<Movies>
+     */
     @GetMapping("/filter")
     public List<Movies> getMoviesByDateCountriesGenreLanguageTheme(@RequestParam(required = false) Integer date,@RequestParam(required = false) Integer countries_id,@RequestParam(required = false) Integer genres_id,@RequestParam(required = false) Integer languages_id,@RequestParam(required = false) Integer themes_id){
         return moviesService.getMoviesByDateCountriesGenreLanguageTheme(date,countries_id,genres_id,languages_id,themes_id);
     }
 
+    /**
+     * get movie by date (year)
+     * @param date
+     * @return ArrayList<Movies>
+     */
     @GetMapping("/date")
     public ArrayList<Movies> getMoviesByDate(@RequestParam(required = true) Integer date){
         return moviesService.getMoviesByDate(date);
     }
 
+    /**
+     * get most popular movies within the parameters
+     * @param startYear
+     * @param endYear
+     * @param minRating
+     * @param limit
+     * @return List<Movies>
+     */
     @GetMapping("/popular")
     public List<Movies> getPopularMovies(
             @RequestParam(value = "startYear", defaultValue = "2001") int startYear,
@@ -97,68 +147,29 @@ public class MoviesController {
             @RequestParam(value = "minRating", defaultValue = "4.0") double minRating,
             @RequestParam(value = "limit", defaultValue = "50") int limit
     ) {
-        //List<Movies> allMovies = moviesService.findAllWithoutPagination(); // Usa il metodo aggiunto nel service
-
-        /*
-        return allMovies.stream()
-                .filter(movie -> {
-                    Integer year = movie.getDate(); // Usa il campo Integer direttamente
-                    return year != null && year >= startYear && year <= endYear && movie.getRating() != null && movie.getRating() >= minRating;
-                })
-                .sorted(Comparator.comparingDouble(Movies::getRating).reversed()) // Ordina per rating decrescente
-                .limit(limit) // Limita a 50 film
-                .toList();
-
-         */
         return moviesService.getMostPopularMovies(startYear,endYear, (float) minRating, Limit.of(limit));
     }
 
-    /*
-    @GetMapping("/similar")
-    public ArrayList<Movies> getMoviesByGenreId(@RequestParam Integer id) {
-        return moviesService.getMoviesByGenreId(id);
-    }
-    */
-
-    //todo:
-//    @GetMapping("/stats")
-//    public ArrayList<Movies> getOverallStats(@RequestParam Integer id) {
-//        return moviesService.getMoviesByActorId(id);
-//    }
-
-    /*
-    @GetMapping("/crew")
-    public ArrayList<Movies> getMovieByCrewId(@RequestParam Integer id) {
-
-    }
-
-    @GetMapping("/countries")
-    public ArrayList<Movies> getMovieByCountryId(@RequestParam Integer id) {
-
-    }
-    */
+    /**
+     * get movies by genre
+     * @param page
+     * @param size
+     * @param genresId
+     * @return Page<Movies>
+     */
     @GetMapping("/genres")
     public Page<Movies> getMovieByGenreId(@RequestParam int page, @RequestParam int size,@RequestParam Integer genresId) {
         PageRequest pageRequest = PageRequest.of(page, size, Sort.by("rating").descending());
         return moviesService.getMoviesByGenreId(genresId, pageRequest);
     }
-    /*
-    @GetMapping("/languages")
-    public ArrayList<Movies> getMovieByLanguageId(@RequestParam Integer id) {
 
-    }
-
-    @GetMapping("/studios")
-    public ArrayList<Movies> getMovieByStudioId(@RequestParam Integer id) {
-
-    }
-
-    @GetMapping("/themes")
-    public ArrayList<Movies> getMovieByThemeId(@RequestParam Integer id) {
-
-    }
-    */
-
+    /**
+     * get top 10 longest movies within parameters
+     * @param countryId
+     * @param genreId
+     * @param languageId
+     * @return List<Movies>
+     */
     @GetMapping("/top10Longest")
     public List<Movies> getTop10LongestMovies(
             @RequestParam(required = false) Integer countryId,
@@ -167,6 +178,13 @@ public class MoviesController {
         return moviesService.getTop10LongestMovies(countryId, genreId, languageId);
     }
 
+    /**
+     * get top 10 shortest movies within parameters
+     * @param countryId
+     * @param genreId
+     * @param languageId
+     * @return List<Movies>
+     */
     @GetMapping("/top10Shortest")
     public List<Movies> getTop10ShortestMovies(
             @RequestParam(required = false) Integer countryId,
@@ -175,13 +193,13 @@ public class MoviesController {
         return moviesService.getTop10ShortestMovies(countryId, genreId, languageId);
     }
 
-    /*
-    @GetMapping("/top10-bestMovies")
-    public List<Map<Movies, Double>> getTop10BestMovies() {
-        return moviesService.getTop10BestMovies();
-    }
+    /**
+     * get top 10 Best movies within parameters
+     * @param countryId
+     * @param genreId
+     * @param languageId
+     * @return List<Movies>
      */
-
     @GetMapping("/top10ByIds")
     public List<Movies> getTop10BestMoviesByFilters(
             @RequestParam(required = false) Integer countryId,
@@ -191,6 +209,13 @@ public class MoviesController {
         return moviesService.getTop10BestMoviesByFilters(countryId, genreId, languageId);
     }
 
+    /**
+     * get top 10 wors movies within parameters
+     * @param countryId
+     * @param genreId
+     * @param languageId
+     * @return List<Movies>
+     */
     @GetMapping("/worst10ByIds")
     public List<Movies> getTop10WorstMoviesByFilters(
             @RequestParam(required = false) Integer countryId,
@@ -201,12 +226,6 @@ public class MoviesController {
 
 }
 
-/*
-get by id
-get by name
-get (studio,genres,...) by movie id
-get (studio,genres,...) by title containing a given string
-get most common value
-*/
+
 
 
