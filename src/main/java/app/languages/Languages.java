@@ -33,16 +33,5 @@ public class Languages {
     @ManyToMany(mappedBy = "languages")
     private List<Movies> movies;
 
-
 }
 
-
-/*
-    comandi per formulare le query:
-    - curl http://localhost:8080/languages (restituisce tutta la tabella di languages)
-    - curl "http://localhost:8080/languages/English?page=0&size=10" (restituisce tutti i nomi dei film con lingua inglese)
-    - curl http://localhost:8080/languages/top10-languages (per sapere le 10 lingue più popolari)
-    - curl "http://localhost:8080/languages/language?movie_id=1" (restituisce la lingua in base all'id del film passato)
-
-
- */

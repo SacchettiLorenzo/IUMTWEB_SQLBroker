@@ -38,29 +38,3 @@ public class Genres {
 
 }
 
-
-/*
-    comandi per formulare le query:
-    - curl http://localhost:8080/genres (per stampare tutta la tabella generi)
-    - curl http://localhost:8080/genres/trending (per trovare i top 10)
-    - curl http://localhost:8080/genres/1 (per trovare il genere associato all'id)
-    - curl "http://localhost:8080/genres/Comedy/movies?page=0&size=10" (per trovare il film associato al genere)
-
-
-    tutti i generi
-    curl http://localhost:8080/genres?page=0&size=20&sortParam=Id&sortDirection=ASC
-
-    un genere per id
-    curl http://localhost:8080/genres/id?id=1
-
-    genere di un film specifico
-    curl http://localhost:8080/genres/movie?movieId=1023330
-    curl "http://localhost:8080/genres/movie?movieId=1023330"
-
-    generi più popolari
-    curl http://localhost:8080/genres/trending?page=0&size=10
-    curl "http://localhost:8080/genres/trending?page=0&size=10"
-
-
-
- */
