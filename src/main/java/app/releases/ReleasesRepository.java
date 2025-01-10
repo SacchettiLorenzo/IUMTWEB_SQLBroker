@@ -28,7 +28,7 @@ public interface ReleasesRepository extends JpaRepository<Releases, Integer>, Pa
     List<Releases> findTopReleases(Pageable pageable);
 
     @Query ("SELECT DISTINCT r.country FROM Releases r")
-    List<String> findDistinctCountry();
+    List<Releases> findDistinctCountry();
 
     List<Releases> getReleasesByMoviesId(Integer movieId);
 }

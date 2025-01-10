@@ -30,7 +30,7 @@ public interface CountriesRepository extends JpaRepository<Countries, Integer>, 
 
     // Find all country names ordered alphabetically with pagination
     @Query("SELECT c.country FROM Countries c ORDER BY c.country ASC")
-    List<String> findTopCountries(Pageable pageable);
+    List<Countries> findTopCountries(Pageable pageable);
 
     // Count the total number of unique country names
     @Query("SELECT COUNT(DISTINCT c.country) FROM Countries c")
