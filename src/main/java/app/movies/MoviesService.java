@@ -84,7 +84,6 @@ public class MoviesService {
         return this.moviesRepository.findMoviesListByDateAndCountriesIdAndGenresIdAndLanguagesIdAndThemesId_Left(null,countryId, genreId, languageId,null,PageRequest.of(0, 10,Sort.by(Sort.Direction.ASC, "rating"))).getContent();
     }
 
-
     public ArrayList<Movies> getMostPopularMovies(Integer dateBefore, Integer dateAfter, Float rating, Limit limit) {
         return moviesRepository.findMoviesListByDateBetweenAndRatingGreaterThanEqualOrderByRatingDesc(dateBefore, dateAfter, rating, limit);
     }

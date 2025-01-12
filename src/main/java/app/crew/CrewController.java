@@ -72,11 +72,11 @@ public class CrewController {
     /**
      * get all crew members that worked for a movie
      * @param movieId
-     * @return ArrayList<Crew>
+     * @return ArrayList<Map<String, String>>
      */
     @GetMapping("/movie")
-    public ArrayList<Crew> getCrewsByMovieId(@RequestParam Integer movieId) {
-        return crewService.getActorsByMovieId(movieId);
+    public ArrayList<Map<String, String>> getCrewsByMovieId(@RequestParam Integer movieId) {
+        return crewService.findCrewAndRoleByMoviesId(movieId);
     }
 
     @GetMapping("/trending")

@@ -1,5 +1,6 @@
 package app.movies;
 
+import app.crew.Crew;
 import org.springframework.data.domain.Limit;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -66,6 +67,7 @@ public interface MoviesRepository extends JpaRepository<Movies, Integer>, Paging
     ArrayList<Movies> findByDate(Integer date);
 
     ArrayList<Movies> findMoviesListByDateBetweenAndRatingGreaterThanEqualOrderByRatingDesc(Integer dateAfter, Integer dateBefore, Float ratingIsGreaterThan, Limit limit);
+
 
 
 

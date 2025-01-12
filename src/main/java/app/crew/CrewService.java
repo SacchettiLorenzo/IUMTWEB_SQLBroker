@@ -32,11 +32,15 @@ public class CrewService {
         return crewRepository.findByName(name);
     }
 
-    public ArrayList<Crew> getActorsByMovieId(Integer id) {
+    public ArrayList<Crew> getCrewByMovieId(Integer id) {
         return this.crewRepository.findCrewListByMoviesId(id);
     }
 
     public ArrayList<Map<String, Object>> findMostPopularCrewList(PageRequest pageRequest) {
         return this.crewRepository.findMostPopularCrewList(pageRequest);
+    }
+
+    public ArrayList<Map<String, String>> findCrewAndRoleByMoviesId(Integer id) {
+        return this.crewRepository.findCrewAndRoleByMoviesId(id);
     }
 }
