@@ -94,27 +94,6 @@ public class CountriesController {
     }
 
     /**
-     * Saves a new country to the database.
-     *
-     * @param country the country object to save.
-     * @return the saved country.
-     */
-    @PostMapping
-    public Countries saveCountry(@RequestBody Countries country) {
-        return countriesService.saveCountry(country);
-    }
-
-    /**
-     * Deletes a country based on its ID.
-     *
-     * @param id the ID of the country to delete.
-     */
-    @DeleteMapping("/{id}")
-    public void deleteCountry(@PathVariable Integer id) {
-        countriesService.deleteCountry(id);
-    }
-
-    /**
      * Retrieves a list of the top 10 most popular countries based on movie counts.
      *
      * @return a list containing the data for the top 10 countries.
