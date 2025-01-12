@@ -1,7 +1,5 @@
 package app.crew;
 
-import app.actors.Actors;
-import app.movies.Movies;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
